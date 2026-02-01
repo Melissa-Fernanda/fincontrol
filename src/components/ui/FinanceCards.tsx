@@ -24,12 +24,12 @@ export function BalanceCard({
   return (
     <div className="bg-[var(--brand-base)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] overflow-hidden">
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
-        <p className="font-light text-sm text-white truncate shrink min-w-0">{title}</p>
+        <p className="font-light text-xs sm:text-sm text-white truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>
       </div>
-      <p className="font-medium text-[18px] sm:text-2xl text-white tabular-nums break-words min-w-0 overflow-visible">{balance}</p>
+      <p className="font-medium text-xl sm:text-2xl text-white tabular-nums break-words min-w-0 overflow-visible leading-tight">{balance}</p>
       {badge && (
-        <Badge variant={badge.variant || "neutral"} className="bg-white/10 text-white truncate max-w-full">
+        <Badge variant={badge.variant || "neutral"} className="bg-white/10 text-white truncate max-w-full text-xs sm:text-sm">
           {badge.text}
         </Badge>
       )}
@@ -56,12 +56,12 @@ export function RevenueCard({
   return (
     <div className="bg-[var(--neutral-25)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] border border-[var(--neutral-100)] overflow-hidden">
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
-        <p className="font-light text-sm text-[var(--neutral-700)] truncate shrink min-w-0">{title}</p>
+        <p className="font-light text-xs sm:text-sm text-[var(--neutral-700)] truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>
       </div>
-      <p className="font-medium text-[18px] sm:text-2xl text-[var(--neutral-950)] tabular-nums break-words min-w-0 overflow-visible">{amount}</p>
+      <p className="font-medium text-xl sm:text-2xl text-[var(--neutral-950)] tabular-nums break-words min-w-0 overflow-visible leading-tight">{amount}</p>
       {badge && (
-        <Badge variant={badge.variant || "neutral"} className="bg-[var(--neutral-75)] truncate max-w-full">
+        <Badge variant={badge.variant || "neutral"} className="bg-[var(--neutral-75)] truncate max-w-full text-xs sm:text-sm">
           {badge.text}
         </Badge>
       )}
@@ -90,15 +90,15 @@ export function ExpensesCard({
   return (
     <div className="bg-[var(--neutral-25)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] border border-[var(--neutral-100)] overflow-hidden">
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
-        <p className="font-light text-sm text-[var(--neutral-700)] truncate shrink min-w-0">{title}</p>
+        <p className="font-light text-xs sm:text-sm text-[var(--neutral-700)] truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>
       </div>
-      <p className="font-medium text-[18px] sm:text-2xl text-[var(--neutral-950)] tabular-nums break-words min-w-0 overflow-visible">{amount}</p>
+      <p className="font-medium text-xl sm:text-2xl text-[var(--neutral-950)] tabular-nums break-words min-w-0 overflow-visible leading-tight">{amount}</p>
       {alert && (
         <Badge
           variant={alert.variant || "error"}
           leftIcon={alert.showIcon !== false ? <Icon icon={AlertCircleIcon} size={16} /> : undefined}
-          className="truncate max-w-full"
+          className="truncate max-w-full text-xs sm:text-sm"
         >
           <span className="font-medium truncate">{alert.label}</span>
           {alert.message ? <span className="truncate"> {alert.message}</span> : null}

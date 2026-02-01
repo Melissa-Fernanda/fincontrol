@@ -40,14 +40,14 @@ export function ConfirmModal({
           <button
             type="button"
             onClick={onCancel}
-            className="h-[var(--height-control)] px-5 flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+            className="h-[var(--height-control)] px-5 flex items-center justify-center text-[var(--neutral-text-muted)] text-sm font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
           >
             {cancelLabel}
           </button>
           <button
             type="button"
             onClick={onConfirm}
-            className={`h-[var(--height-control)] px-5 flex items-center justify-center text-[14px] font-normal rounded-[var(--radius-md)] transition-colors ${confirmClasses}`}
+            className={`h-[var(--height-control)] px-5 flex items-center justify-center text-sm font-normal rounded-[var(--radius-md)] transition-colors ${confirmClasses}`}
           >
             {confirmLabel}
           </button>

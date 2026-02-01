@@ -53,7 +53,7 @@ export function RecentTransactions({
       />
       <div className="flex flex-col gap-4 p-4 rounded-[inherit] w-full flex-1 min-h-0 overflow-hidden z-10">
         <div className="flex items-center justify-between shrink-0 w-full">
-          <h2 className="font-[var(--font-lexend)] font-normal text-[18px] leading-[1.4] text-[var(--neutral-text-black)]">
+          <h2 className="font-[var(--font-lexend)] font-medium text-xl md:text-2xl leading-tight text-[var(--neutral-text-black)]">
             Transações Recentes
           </h2>
           {itemHref ? (
@@ -61,7 +61,7 @@ export function RecentTransactions({
               href={itemHref}
               className="bg-[var(--neutral-75)] hover:bg-[var(--neutral-100)] transition-colors cursor-pointer flex gap-2 items-center justify-center px-2 py-1.5 rounded-xl shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
             >
-              <span className="font-[var(--font-lexend)] font-light text-[14px] leading-[1.4] text-[var(--neutral-text-strong)]">
+              <span className="font-[var(--font-lexend)] font-light text-sm leading-[1.4] text-[var(--neutral-text-strong)]">
                 Ver detalhes
               </span>
               <Icon icon={ArrowUpRight01Icon} size={14} className="text-[var(--neutral-text-strong)] shrink-0" />
@@ -72,7 +72,7 @@ export function RecentTransactions({
               onClick={onViewDetails}
               className="bg-[var(--neutral-75)] hover:bg-[var(--neutral-100)] transition-colors cursor-pointer flex gap-2 items-center justify-center px-2 py-1.5 rounded-xl shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
             >
-              <span className="font-[var(--font-lexend)] font-light text-[14px] leading-[1.4] text-[var(--neutral-text-strong)]">
+              <span className="font-[var(--font-lexend)] font-light text-sm leading-[1.4] text-[var(--neutral-text-strong)]">
                 Ver detalhes
               </span>
               <Icon icon={ArrowUpRight01Icon} size={14} className="text-[var(--neutral-text-strong)] shrink-0" />
@@ -82,10 +82,10 @@ export function RecentTransactions({
         <div className="flex flex-1 min-h-0 flex-col gap-2 items-start w-full overflow-y-auto max-h-[200px] sm:max-h-[280px] md:max-h-none">
           {transactions.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center py-4 px-4 text-center w-full">
-              <p className="text-[16px] font-medium text-[var(--neutral-text-black)]">
+              <p className="text-base md:text-lg font-medium text-[var(--neutral-text-black)]">
                 Nenhuma transação
               </p>
-              <p className="mt-1 text-[13px] font-light text-[var(--neutral-text-muted)] w-full">
+              <p className="mt-1 text-sm font-light text-[var(--neutral-text-muted)] w-full">
                 Suas movimentações aparecerão aqui. Adicione transações na tela de Transações.
               </p>
               <div className="mt-4 w-full max-w-[280px] flex-1 min-h-0 flex items-center justify-center">

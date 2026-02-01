@@ -19,10 +19,10 @@ export default function Home() {
   return (
     <>
       <div className="mb-4 sm:mb-6">
-        <h1 className="text-[24px] sm:text-[32px] font-semibold text-[var(--neutral-text-black)]">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-semibold leading-tight text-[var(--neutral-text-black)]">
           Dashboard
         </h1>
-        <p className="mt-1 sm:mt-2 text-[14px] sm:text-base text-[var(--neutral-text-muted)]">
+        <p className="mt-1 sm:mt-2 text-sm md:text-base text-[var(--neutral-text-muted)]">
           Bem-vindo ao FinControl. Visão geral das suas finanças.
         </p>
       </div>

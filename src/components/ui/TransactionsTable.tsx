@@ -124,7 +124,7 @@ export function TransactionsTable() {
             placeholder="Faça sua busca..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-transparent border-none outline-none w-full text-[14px] text-[var(--neutral-700)] placeholder:text-[var(--neutral-text-muted)] font-light"
+            className="bg-transparent border-none outline-none w-full text-sm text-[var(--neutral-700)] placeholder:text-[var(--neutral-text-muted)] font-light"
           />
         </div>
 
@@ -135,7 +135,7 @@ export function TransactionsTable() {
           className="md:hidden h-[var(--height-control)] px-4 bg-[var(--surface-input)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] flex items-center gap-2 text-[var(--neutral-text-muted)] hover:bg-[var(--neutral-75)]"
         >
           <Icon icon={Tag01Icon} size={20} className="shrink-0" />
-          <span className="text-[14px] font-light">Filtrar</span>
+          <span className="text-sm font-light">Filtrar</span>
         </button>
 
         {/* Desktop: Category Dropdown */}
@@ -149,7 +149,7 @@ export function TransactionsTable() {
             className="h-[var(--height-control)] px-4 bg-[var(--surface-input)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] flex items-center gap-2 text-[var(--neutral-text-muted)] hover:bg-[var(--neutral-75)] active:bg-[var(--neutral-100)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-colors"
           >
             <Icon icon={Tag01Icon} size={20} className="shrink-0" />
-            <span className="text-[14px] font-light">
+            <span className="text-sm font-light">
               {categoryFilter === CATEGORY_ALL ? "Categoria" : categoryFilter}
             </span>
             <Icon icon={ArrowDown01Icon} size={12} className="ml-1 shrink-0" />
@@ -162,7 +162,7 @@ export function TransactionsTable() {
                   setCategoryFilter(CATEGORY_ALL);
                   setCategoryOpen(false);
                 }}
-                className="w-full px-4 py-2 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                className="w-full px-4 py-2 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
               >
                 Todas
               </button>
@@ -174,7 +174,7 @@ export function TransactionsTable() {
                     setCategoryFilter(cat);
                     setCategoryOpen(false);
                   }}
-                  className="w-full px-4 py-2 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                  className="w-full px-4 py-2 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                 >
                   {cat}
                 </button>
@@ -194,13 +194,13 @@ export function TransactionsTable() {
             className="h-[var(--height-control)] px-4 bg-[var(--surface-input)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] flex items-center gap-2 text-[var(--neutral-text-muted)] hover:bg-[var(--neutral-75)] active:bg-[var(--neutral-100)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-colors"
           >
             <Icon icon={Calendar01Icon} size={20} className="shrink-0" />
-            <span className="text-[14px] font-light whitespace-nowrap">{dateLabel}</span>
+            <span className="text-sm font-light whitespace-nowrap">{dateLabel}</span>
             <Icon icon={ArrowDown01Icon} size={12} className="ml-1 shrink-0" />
           </button>
           {dateOpen && (
             <div className="absolute top-full right-0 mt-1 w-[280px] rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] p-4 shadow-[var(--shadow-dropdown)] z-10 flex flex-col gap-3 font-['Lexend']">
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-light text-[var(--neutral-text-muted)]">De</label>
+                <label className="text-xs font-light text-[var(--neutral-text-muted)]">De</label>
                 <DatePicker
                   id="transactions-date-start"
                   value={dateStart}
@@ -209,7 +209,7 @@ export function TransactionsTable() {
                 />
               </div>
               <div className="flex flex-col gap-1.5">
-                <label className="text-[12px] font-light text-[var(--neutral-text-muted)]">Até</label>
+                <label className="text-xs font-light text-[var(--neutral-text-muted)]">Até</label>
                 <DatePicker
                   id="transactions-date-end"
                   value={dateEnd}
@@ -224,7 +224,7 @@ export function TransactionsTable() {
                     setDateStart("");
                     setDateEnd("");
                   }}
-                  className="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--neutral-75)] py-2.5 text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-100)] active:bg-[var(--neutral-200)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-colors"
+                  className="mt-1 w-full rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--neutral-75)] py-2.5 text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-100)] active:bg-[var(--neutral-200)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-colors"
                 >
                   Limpar filtro
                 </button>
@@ -240,7 +240,7 @@ export function TransactionsTable() {
           className="hidden md:flex h-[var(--height-control)] px-4 bg-[var(--brand-base)] rounded-[var(--radius-md)] items-center gap-2 text-white hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)]"
         >
           <Icon icon={Add01Icon} size={20} className="shrink-0" />
-          <span className="text-[14px] font-normal">Nova Transação</span>
+          <span className="text-sm font-normal">Nova Transação</span>
         </button>
       </div>
 
@@ -260,14 +260,14 @@ export function TransactionsTable() {
                 setDateEnd("");
                 setFiltersOpen(false);
               }}
-              className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+              className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-sm font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
             >
               Limpar
             </button>
             <button
               type="button"
               onClick={() => setFiltersOpen(false)}
-              className="flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-[14px] font-normal rounded-[var(--radius-md)] bg-[var(--brand-base)] hover:opacity-90 transition-colors"
+              className="flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-sm font-normal rounded-[var(--radius-md)] bg-[var(--brand-base)] hover:opacity-90 transition-colors"
             >
               Aplicar
             </button>
@@ -276,12 +276,12 @@ export function TransactionsTable() {
       >
         <div className="flex flex-col gap-4 pb-4">
           <div>
-            <label className="block text-[12px] font-light text-[var(--neutral-text-muted)] mb-1.5">Categoria</label>
+            <label className="block text-xs font-light text-[var(--neutral-text-muted)] mb-1.5">Categoria</label>
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={() => setCategoryFilter(CATEGORY_ALL)}
-                className={`px-3 py-2 rounded-[var(--radius-md)] text-[14px] font-light transition-colors ${
+                className={`px-3 py-2 rounded-[var(--radius-md)] text-sm font-light transition-colors ${
                   categoryFilter === CATEGORY_ALL
                     ? "bg-[var(--brand-base)] text-white"
                     : "bg-[var(--surface-input)] border border-[var(--neutral-100)] text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
@@ -294,8 +294,8 @@ export function TransactionsTable() {
                   key={cat}
                   type="button"
                   onClick={() => setCategoryFilter(cat)}
-                  className={`px-3 py-2 rounded-[var(--radius-md)] text-[14px] font-light transition-colors ${
-                    categoryFilter === cat
+                className={`px-3 py-2 rounded-[var(--radius-md)] text-sm font-light transition-colors ${
+                  categoryFilter === cat
                       ? "bg-[var(--brand-base)] text-white"
                       : "bg-[var(--surface-input)] border border-[var(--neutral-100)] text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                   }`}
@@ -306,7 +306,7 @@ export function TransactionsTable() {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <label className="text-[12px] font-light text-[var(--neutral-text-muted)]">Período</label>
+            <label className="text-xs font-light text-[var(--neutral-text-muted)]">Período</label>
             <div className="flex flex-col gap-2">
               <DatePicker
                 id="filters-date-start"
@@ -372,16 +372,16 @@ export function TransactionsTable() {
         <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto p-4 pb-24 md:pb-4 flex flex-col gap-2 bg-[var(--surface-input)]">
           {filteredTransactions.length === 0 ? (
             <div className="flex flex-1 min-h-0 flex-col items-center justify-center py-12 pt-4 px-4 text-center">
-              <p className="text-[16px] sm:text-[18px] font-medium text-[var(--neutral-text-black)]">
+              <p className="text-base md:text-lg font-medium text-[var(--neutral-text-black)]">
                 Nenhuma transação cadastrada
               </p>
-              <p className="mt-2 text-[13px] sm:text-[14px] font-light text-[var(--neutral-text-muted)] max-w-[480px]">
+              <p className="mt-2 text-sm font-light text-[var(--neutral-text-muted)] max-w-[480px]">
                 Adicione sua primeira transação para acompanhar entradas e saídas e manter suas finanças em dia.
               </p>
               <button
                 type="button"
                 onClick={() => setModalOpen(true)}
-                className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-[14px] font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
+                className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-sm font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
               >
                 Adicionar transação
               </button>
@@ -398,7 +398,7 @@ export function TransactionsTable() {
               {/* Desktop: Table view */}
               <div className="hidden md:flex flex-1 min-h-0 overflow-x-auto flex-col gap-2">
               {/* Column Titles */}
-              <div className="grid grid-cols-[minmax(140px,1fr)_70px_90px_minmax(80px,1fr)_90px_72px] gap-x-3 gap-y-0 items-center py-[10px] px-4 bg-[var(--neutral-75)] rounded-t-[var(--radius-md)] text-[var(--neutral-text-muted)] text-[14px] font-normal shrink-0 min-w-[560px]">
+              <div className="grid grid-cols-[minmax(140px,1fr)_70px_90px_minmax(80px,1fr)_90px_72px] gap-x-3 gap-y-0 items-center py-[10px] px-4 bg-[var(--neutral-75)] rounded-t-[var(--radius-md)] text-[var(--neutral-text-muted)] text-sm font-normal shrink-0 min-w-[560px]">
                 <div className="min-w-0 truncate">Descrição / Categoria</div>
                 <div className="text-center shrink-0">Data</div>
                 <div className="text-center shrink-0 truncate">Pagamento</div>
@@ -422,29 +422,29 @@ export function TransactionsTable() {
                   )}
                 </div>
                 <div className="flex flex-col min-w-0 overflow-hidden">
-                  <span className="text-[var(--neutral-700)] text-[14px] font-normal leading-tight truncate">
+                  <span className="text-[var(--neutral-700)] text-sm font-normal leading-tight truncate">
                     {tx.description}
                   </span>
-                  <span className="text-[var(--neutral-text-muted)] text-[12px] font-light leading-tight truncate">
+                  <span className="text-[var(--neutral-text-muted)] text-xs font-light leading-tight truncate">
                     {tx.category}
                   </span>
                 </div>
               </div>
 
               {/* Date */}
-              <div className="text-center text-[var(--neutral-700)] text-[14px] font-normal whitespace-nowrap shrink-0">
+              <div className="text-center text-[var(--neutral-700)] text-sm font-normal whitespace-nowrap shrink-0">
                 {tx.date}
               </div>
 
               {/* Payment Method */}
               <div className="flex justify-center min-w-0 shrink-0">
-                <span className="bg-[var(--neutral-75)] px-2 py-1 rounded-[10px] text-[var(--neutral-700)] text-[13px] font-light truncate max-w-full">
+                <span className="bg-[var(--neutral-75)] px-2 py-1 rounded-[10px] text-[var(--neutral-700)] text-xs font-light truncate max-w-full">
                   {tx.paymentMethod}
                 </span>
               </div>
 
               {/* Details */}
-              <div className="text-center text-[var(--neutral-700)] text-[14px] font-normal truncate min-w-0">
+              <div className="text-center text-[var(--neutral-700)] text-sm font-normal truncate min-w-0">
                 {tx.details}
               </div>
 
@@ -452,8 +452,8 @@ export function TransactionsTable() {
               <div
                 className={
                   tx.type === "income"
-                    ? "text-center text-[14px] font-normal text-[var(--feedback-success-base)] whitespace-nowrap shrink-0"
-                    : "text-center text-[14px] font-normal text-[var(--feedback-error-base)] whitespace-nowrap shrink-0"
+                    ? "text-center text-sm font-normal text-[var(--feedback-success-base)] whitespace-nowrap shrink-0"
+                    : "text-center text-sm font-normal text-[var(--feedback-error-base)] whitespace-nowrap shrink-0"
                 }
               >
                 {formatCurrency(tx.amount)}
@@ -498,16 +498,16 @@ export function TransactionsTable() {
                           )}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-[var(--neutral-700)] text-[14px] font-normal truncate">
+                          <p className="text-[var(--neutral-700)] text-sm font-normal truncate">
                             {tx.description}
                           </p>
-                          <p className="text-[var(--neutral-text-muted)] text-[12px]">
+                          <p className="text-[var(--neutral-text-muted)] text-xs">
                             {tx.category} • {tx.date}
                           </p>
                         </div>
                       </div>
                       <p
-                        className={`text-[14px] font-normal shrink-0 ${
+                        className={`text-sm font-normal shrink-0 ${
                           tx.type === "income"
                             ? "text-[var(--feedback-success-base)]"
                             : "text-[var(--feedback-error-base)]"
@@ -517,7 +517,7 @@ export function TransactionsTable() {
                       </p>
                     </div>
                     <div className="flex items-center justify-between pt-2 border-t border-[var(--neutral-100)]">
-                      <span className="text-[12px] text-[var(--neutral-text-muted)]">
+                      <span className="text-xs text-[var(--neutral-text-muted)]">
                         {tx.paymentMethod}
                         {tx.details ? ` • ${tx.details}` : ""}
                       </span>

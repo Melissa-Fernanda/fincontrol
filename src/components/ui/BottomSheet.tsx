@@ -168,12 +168,12 @@ export function BottomSheet({
               <div className="flex-1 flex flex-col items-start min-w-0">
                 <h2
                   id="bottom-sheet-title"
-                  className="text-[var(--neutral-text-black)] text-[20px] font-medium"
+                  className="text-[var(--neutral-text-black)] text-xl font-medium leading-tight"
                 >
                   {title}
                 </h2>
                 {subtitle && (
-                  <p className="text-[var(--neutral-text-muted)] text-[14px] font-light mt-0.5">
+                  <p className="text-[var(--neutral-text-muted)] text-sm font-light mt-0.5">
                     {subtitle}
                   </p>
                 )}
@@ -203,21 +203,21 @@ export function BottomSheet({
           <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-touch px-6">
             {showDiscardConfirm ? (
               <div className="py-6 flex flex-col gap-4">
-                <p className="text-[var(--neutral-700)] text-[14px] font-light">
+                <p className="text-[var(--neutral-700)] text-sm font-light">
                   Descartar alterações?
                 </p>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={handleCancelDiscard}
-                    className="flex-1 h-[var(--height-control)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-input)] text-[var(--neutral-700)] text-[14px] font-light hover:bg-[var(--neutral-75)]"
+                    className="flex-1 h-[var(--height-control)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-input)] text-[var(--neutral-700)] text-sm font-light hover:bg-[var(--neutral-75)]"
                   >
                     Cancelar
                   </button>
                   <button
                     type="button"
                     onClick={handleConfirmDiscard}
-                    className="flex-1 h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--feedback-error-base)] text-white text-[14px] font-normal hover:bg-[var(--feedback-error-dark)]"
+                    className="flex-1 h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--feedback-error-base)] text-white text-sm font-normal hover:bg-[var(--feedback-error-dark)]"
                   >
                     Descartar
                   </button>

@@ -77,15 +77,15 @@ function DueDateItem({
 
         <div className="flex flex-1 items-center justify-between min-w-0 gap-2">
           <div className="flex flex-col items-start min-w-0">
-            <p className="font-['Lexend'] font-normal text-[var(--neutral-700)] text-[14px] leading-normal truncate">
+            <p className="font-[var(--font-lexend)] font-normal text-sm text-[var(--neutral-700)] leading-normal truncate">
               {title}
             </p>
-            <p className="font-['Lexend'] font-light text-[var(--neutral-text-muted)] text-[12px] leading-normal whitespace-pre-wrap">
+            <p className="font-[var(--font-lexend)] font-light text-xs text-[var(--neutral-text-muted)] leading-normal whitespace-pre-wrap">
               {subtitle}
             </p>
           </div>
           <div className="flex items-center gap-[8px] shrink-0">
-            <p className="font-['Lexend'] font-normal text-[var(--neutral-700)] text-[14px] leading-normal">
+            <p className="font-[var(--font-lexend)] font-normal text-sm text-[var(--neutral-700)] leading-normal tabular-nums">
               {amount}
             </p>
             <div className="flex min-w-[90px] justify-end gap-1">
@@ -197,7 +197,7 @@ export function UpcomingDueDates() {
     <div className="w-full h-full flex flex-col min-h-0 min-w-0">
       <div className="w-full flex-1 min-h-[560px] md:min-h-0 bg-[var(--surface-card)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] border border-[var(--neutral-100)] p-0 flex flex-col gap-4">
         <div className="flex items-center justify-between w-full shrink-0 pt-4 px-4">
-          <h2 className="font-['Lexend'] font-normal text-[var(--neutral-text-black)] text-[18px] leading-[1.4]">
+          <h2 className="font-[var(--font-lexend)] font-medium text-xl md:text-2xl leading-tight text-[var(--neutral-text-black)]">
             Próximos Vencimentos
           </h2>
 
@@ -207,7 +207,7 @@ export function UpcomingDueDates() {
             className="h-[var(--height-control)] px-4 bg-[var(--brand-base)] hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)] flex gap-2 items-center rounded-[var(--radius-md)] shrink-0 text-white"
           >
             <Icon icon={Add01Icon} size={20} className="text-white shrink-0" />
-            <span className="text-[14px] font-normal text-white">
+            <span className="text-sm font-normal text-white">
               Nova Conta Fixa
             </span>
           </button>
@@ -216,16 +216,16 @@ export function UpcomingDueDates() {
         <div className="w-full flex-1 min-h-0 overflow-y-auto">
           {items.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center py-12 px-4 text-center h-full">
-              <p className="text-[16px] sm:text-[18px] font-medium text-[var(--neutral-text-black)]">
+              <p className="text-base md:text-lg font-medium text-[var(--neutral-text-black)]">
                 Nenhuma conta fixa cadastrada
               </p>
-              <p className="mt-2 text-[13px] sm:text-[14px] font-light text-[var(--neutral-text-muted)] max-w-[480px]">
+              <p className="mt-2 text-sm font-light text-[var(--neutral-text-muted)] max-w-[480px]">
                 Cadastre suas contas recorrentes (aluguel, luz, assinaturas) para acompanhar vencimentos e planejar seu orçamento.
               </p>
               <button
                 type="button"
                 onClick={() => setModalOpen(true)}
-                className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-[14px] font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
+                className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-sm font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
               >
                 Adicionar conta fixa
               </button>

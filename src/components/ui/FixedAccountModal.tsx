@@ -131,7 +131,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-sm font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
           >
             Cancelar
           </button>
@@ -140,7 +140,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
             onClick={handleSubmit}
             disabled={!isValid}
             className={cn(
-              "flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-[14px] font-normal rounded-[var(--radius-md)] transition-colors",
+              "flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-sm font-normal rounded-[var(--radius-md)] transition-colors",
               isValid ? "bg-[var(--brand-base)] hover:opacity-90" : "bg-[var(--neutral-300)] cursor-not-allowed opacity-60"
             )}
           >
@@ -150,15 +150,15 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
       }
     >
       <div className="gap-3 flex flex-col pb-4">
-            {/* Descrição / Nome - full width */}
-            <div className="w-full h-fit py-2 px-4 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
+            {/* Nome da conta - full width */}
+            <div className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
               <Icon icon={Edit01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
               <input
                 type="text"
                 placeholder="Ex: Almoço, Uber, Mercado..."
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-transparent text-[14px] text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none py-2"
+                className="w-full bg-transparent text-sm text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
               />
             </div>
 
@@ -175,7 +175,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                   className="w-full min-w-0 h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 cursor-pointer hover:bg-[var(--neutral-75)] transition-colors"
                 >
                   <Icon icon={Tag01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                  <span className={`flex-1 text-left text-[14px] font-light truncate ${category ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]"}`}>
+                  <span className={`flex-1 text-left text-sm font-light truncate ${category ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]"}`}>
                     {category || "Categoria"}
                   </span>
                   <Icon icon={ArrowDown01Icon} size={16} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${categoryOpen ? "rotate-180" : ""}`} />
@@ -190,7 +190,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                           setCategory(c);
                           setCategoryOpen(false);
                         }}
-                        className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                        className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                       >
                         {c}
                       </button>
@@ -198,14 +198,14 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                   </div>
                 )}
               </div>
-              <div className="min-w-0 h-[var(--height-control)] py-2 px-4 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
+              <div className="min-w-0 h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
                 <Icon icon={Wallet01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
                 <input
                   type="text"
                   placeholder="R$ 0,00"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  className="w-full min-w-0 bg-transparent text-[14px] text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
+                  className="w-full min-w-0 bg-transparent text-sm text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
                 />
               </div>
             </div>
@@ -223,7 +223,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                   className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 cursor-pointer hover:bg-[var(--neutral-75)] transition-colors"
                 >
                   <Icon icon={Calendar01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                  <span className={`flex-1 text-left text-[14px] font-light truncate ${recurrence ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]"}`}>
+                  <span className={`flex-1 text-left text-sm font-light truncate ${recurrence ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]"}`}>
                     {recurrence || "Recorrência"}
                   </span>
                   <Icon icon={ArrowDown01Icon} size={16} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${recurrenceOpen ? "rotate-180" : ""}`} />
@@ -238,7 +238,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                           setRecurrence(r);
                           setRecurrenceOpen(false);
                         }}
-                        className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                        className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                       >
                         {r}
                       </button>
@@ -267,7 +267,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                 className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 cursor-pointer hover:bg-[var(--neutral-75)] transition-colors"
               >
                 <Icon icon={CreditCardIcon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                <span className={`flex-1 text-left text-[14px] font-light truncate ${paymentMethod ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]"}`}>
+                <span className={`flex-1 text-left text-sm font-light truncate ${paymentMethod ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]"}`}>
                   {paymentMethod || "Meio pagamento"}
                 </span>
                 <Icon icon={ArrowDown01Icon} size={16} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${paymentOpen ? "rotate-180" : ""}`} />
@@ -282,7 +282,7 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                         setPaymentMethod(pm);
                         setPaymentOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                      className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                     >
                       {pm}
                     </button>

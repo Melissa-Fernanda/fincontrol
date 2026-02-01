@@ -92,10 +92,10 @@ export function FixedAccountDetailModal({
                   )}
                 </div>
                 <div className="flex flex-col min-w-0">
-                  <span className="text-[20px] font-medium leading-tight text-[var(--neutral-300)] truncate">
+                  <span className="text-xl font-medium leading-tight text-[var(--neutral-300)] truncate">
                     {item.name}
                   </span>
-                  <span className="text-[14px] font-light text-[var(--neutral-500)]">
+                  <span className="text-sm font-light text-[var(--neutral-500)]">
                     Conta Recorrente
                   </span>
                 </div>
@@ -124,11 +124,11 @@ export function FixedAccountDetailModal({
       {/* Card do valor */}
       <div className="w-full bg-white/[0.08] rounded-[var(--radius-lg)] p-3 py-4 flex flex-col items-center border border-white/[0.08] relative overflow-hidden">
         <div className="absolute inset-0 border border-white/[0.08] rounded-[var(--radius-lg)] pointer-events-none" />
-              <span className="text-[16px] font-normal text-white mb-2">Valor Mensal</span>
+              <span className="text-base font-normal text-white mb-2">Valor Mensal</span>
               <span className="text-[24px] font-medium text-white mb-3">{item.amount}</span>
               <div className="bg-white/[0.12] px-3 py-1 rounded-[var(--radius-md)] flex items-center gap-1.5">
                 <Icon icon={Calendar01Icon} size={14} className="text-white shrink-0" />
-                <span className="text-[14px] font-light text-white">Em aberto</span>
+                <span className="text-sm font-light text-white">Em aberto</span>
         </div>
       </div>
     </div>
@@ -145,14 +145,14 @@ export function FixedAccountDetailModal({
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-normal rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-sm font-normal rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
           >
             Cancelar
           </button>
           <button
             type="button"
             onClick={handleMarkAsPaid}
-            className="flex-[1.5] h-[var(--height-control)] bg-[var(--feedback-success-base)] text-white text-[14px] font-normal rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[var(--feedback-success-dark)] transition-colors shadow-sm border border-[var(--feedback-success-base)]/10"
+            className="flex-[1.5] h-[var(--height-control)] bg-[var(--feedback-success-base)] text-white text-sm font-normal rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[var(--feedback-success-dark)] transition-colors shadow-sm border border-[var(--feedback-success-base)]/10"
           >
             Marcar como Paga
           </button>
@@ -176,7 +176,7 @@ export function FixedAccountDetailModal({
                 className="w-full h-[var(--height-control)] bg-[var(--surface-input)] border border-[var(--neutral-100)] rounded-[var(--radius-md)] px-4 flex items-center gap-3 hover:border-[var(--neutral-stroke-muted)] transition-colors cursor-pointer text-left"
               >
                 <Icon icon={CreditCardIcon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                <span className={`flex-1 text-[14px] font-light ${paymentMethod ? "text-[var(--neutral-text-black)]" : "text-[var(--neutral-text-muted)]"}`}>
+                <span className={`flex-1 text-sm font-light ${paymentMethod ? "text-[var(--neutral-text-black)]" : "text-[var(--neutral-text-muted)]"}`}>
                   {paymentMethod || "Meio pagamento"}
                 </span>
                 <Icon icon={ArrowDown01Icon} size={20} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${paymentOpen ? "rotate-180" : ""}`} />
@@ -191,7 +191,7 @@ export function FixedAccountDetailModal({
                         setPaymentMethod(pm);
                         setPaymentOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                      className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                     >
                       {pm}
                     </button>
@@ -210,7 +210,7 @@ export function FixedAccountDetailModal({
                 className="w-full h-[var(--height-control)] bg-[var(--surface-input)] border border-[var(--neutral-100)] rounded-[var(--radius-md)] px-4 flex items-center gap-3 hover:border-[var(--neutral-stroke-muted)] transition-colors cursor-pointer text-left"
               >
                 <Icon icon={Calendar01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                <span className={`flex-1 text-[14px] font-light ${recurrence ? "text-[var(--neutral-text-black)]" : "text-[var(--neutral-text-muted)]"}`}>
+                <span className={`flex-1 text-sm font-light ${recurrence ? "text-[var(--neutral-text-black)]" : "text-[var(--neutral-text-muted)]"}`}>
                   {recurrence || "Recorrência"}
                 </span>
                 <Icon icon={ArrowDown01Icon} size={20} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${recurrenceOpen ? "rotate-180" : ""}`} />
@@ -225,7 +225,7 @@ export function FixedAccountDetailModal({
                         setRecurrence(r);
                         setRecurrenceOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                      className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                     >
                       {r}
                     </button>

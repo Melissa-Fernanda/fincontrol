@@ -61,6 +61,14 @@
   --color-neutral-static-white: var(--neutral-static-white);
   --color-neutral-static-black: var(--neutral-static-black);
 
+  /* Typography - mobile-first, escalável */
+  --text-title-mobile: 1.25rem; /* 20px */
+  --text-title-desktop: 1.5rem; /* 24px */
+  --text-subtitle-mobile: 0.875rem; /* 14px */
+  --text-subtitle-desktop: 1rem; /* 16px */
+  --text-label-mobile: 0.75rem; /* 12px */
+  --text-label-desktop: 0.875rem; /* 14px */
+
   /* Layout */
   --radius-md: 12px;
   --radius-lg: 16px;

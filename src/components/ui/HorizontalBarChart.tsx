@@ -57,7 +57,7 @@ export function HorizontalBarChart({
     >
       {/* Header - altura fixa */}
       <div className="flex items-center justify-between gap-4 mb-4 shrink-0">
-        <h2 className="flex-1 min-w-0 text-[18px] leading-[1.4] text-[var(--neutral-text-black)] font-normal font-sans">
+        <h2 className="flex-1 min-w-0 text-xl md:text-2xl leading-tight text-[var(--neutral-text-black)] font-medium font-sans">
           {title}
         </h2>
         {detailsHref ? (
@@ -65,7 +65,7 @@ export function HorizontalBarChart({
             href={detailsHref}
             className="bg-[var(--neutral-75)] hover:bg-[var(--neutral-100)] transition-colors cursor-pointer flex gap-2 items-center justify-center px-2 py-1.5 rounded-xl shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
           >
-            <span className="font-[var(--font-lexend)] font-light text-[14px] leading-[1.4] text-[var(--neutral-text-strong)]">
+            <span className="font-[var(--font-lexend)] font-light text-sm leading-[1.4] text-[var(--neutral-text-strong)]">
               Ver detalhes
             </span>
             <Icon icon={ArrowUpRight01Icon} size={14} className="text-[var(--neutral-text-strong)] shrink-0" />
@@ -76,7 +76,7 @@ export function HorizontalBarChart({
             onClick={onViewDetails}
             className="bg-[var(--neutral-75)] hover:bg-[var(--neutral-100)] transition-colors cursor-pointer flex gap-2 items-center justify-center px-2 py-1.5 rounded-xl shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
           >
-            <span className="font-[var(--font-lexend)] font-light text-[14px] leading-[1.4] text-[var(--neutral-text-strong)]">
+            <span className="font-[var(--font-lexend)] font-light text-sm leading-[1.4] text-[var(--neutral-text-strong)]">
               Ver detalhes
             </span>
             <Icon icon={ArrowUpRight01Icon} size={14} className="text-[var(--neutral-text-strong)] shrink-0" />
@@ -88,10 +88,10 @@ export function HorizontalBarChart({
       <div className="flex-1 min-h-0 flex flex-col relative w-full">
         {data.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center text-center min-h-0 py-4">
-            <p className="text-[16px] font-medium text-[var(--neutral-text-black)]">
+            <p className="text-base md:text-lg font-medium text-[var(--neutral-text-black)]">
               Nenhuma despesa por categoria
             </p>
-            <p className="mt-1 text-[13px] font-light text-[var(--neutral-text-muted)] w-full">
+            <p className="mt-1 text-sm font-light text-[var(--neutral-text-muted)] w-full">
               Adicione transações e contas fixas para ver o gráfico
             </p>
             <div className="mt-4 w-full max-w-[320px] flex-1 min-h-0 flex items-center justify-center">
@@ -108,7 +108,7 @@ export function HorizontalBarChart({
             <div className="flex justify-between w-full pl-[min(100px,28vw)] sm:pl-[100px] mb-1 shrink-0 min-w-0">
               {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((val) => (
                 <div key={val} className="w-0 flex justify-center">
-                  <span className="text-[12px] text-[var(--neutral-text-muted)]">{val}</span>
+                  <span className="text-xs text-[var(--neutral-text-muted)]">{val}</span>
                 </div>
               ))}
             </div>
@@ -136,7 +136,7 @@ export function HorizontalBarChart({
               >
                 {/* Category Label */}
                 <div className="w-[min(100px,28vw)] sm:w-[100px] pr-2 sm:pr-4 text-right shrink-0 min-w-0 overflow-hidden">
-                  <span className="text-[12px] text-[var(--neutral-text-muted)] truncate block">
+                  <span className="text-xs text-[var(--neutral-text-muted)] truncate block">
                     {item.category}
                   </span>
                 </div>
@@ -166,7 +166,7 @@ export function HorizontalBarChart({
               {/* Tooltip no hover: categoria, % e valor em R$ */}
               {hoveredItem && (
                 <div
-                  className="fixed z-50 px-3 py-2 rounded-lg bg-[var(--brand-base)] text-white text-[13px] font-medium shadow-[var(--shadow-modal)] whitespace-nowrap pointer-events-none -translate-x-1/2 -translate-y-full"
+                  className="fixed z-50 px-3 py-2 rounded-lg bg-[var(--brand-base)] text-white text-sm font-medium shadow-[var(--shadow-modal)] whitespace-nowrap pointer-events-none -translate-x-1/2 -translate-y-full"
                   style={{
                     top: tooltipPosition.top,
                     left: tooltipPosition.left,

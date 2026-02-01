@@ -73,14 +73,14 @@ export function TransactionItem({ transaction, href }: TransactionItemProps) {
         <TransactionIcon type={transaction.type} />
         <div className="flex flex-1 min-w-0 gap-2 items-center justify-between">
           <div className="flex flex-1 min-w-0 flex-col items-start overflow-hidden">
-            <p className="font-[var(--font-lexend)] font-normal text-[14px] text-[var(--neutral-700)] truncate w-full">
+            <p className="font-[var(--font-lexend)] font-normal text-sm text-[var(--neutral-700)] truncate w-full">
               {transaction.title}
             </p>
-            <p className="font-[var(--font-lexend)] font-light text-[12px] text-[var(--neutral-text-muted)] truncate w-full">
+            <p className="font-[var(--font-lexend)] font-light text-xs text-[var(--neutral-text-muted)] truncate w-full">
               {transaction.date} • {transaction.category}
             </p>
           </div>
-          <p className="font-[var(--font-lexend)] font-normal text-[14px] text-[var(--neutral-700)] tabular-nums shrink-0">
+          <p className="font-[var(--font-lexend)] font-normal text-sm tabular-nums shrink-0 text-[var(--neutral-700)]">
             {transaction.amount}
           </p>
         </div>
@@ -114,21 +114,21 @@ export function BillItem({ bill, href }: BillItemProps) {
     <ListItemCard layout="col">
       <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-3 w-full min-w-0">
         <div className="flex flex-1 min-w-0 flex-col items-start gap-0.5">
-          <p className="font-[var(--font-lexend)] font-normal text-[14px] text-[var(--neutral-text-strong)] truncate w-full max-w-full">
+          <p className="font-[var(--font-lexend)] font-normal text-sm text-[var(--neutral-text-strong)] truncate w-full max-w-full">
             {bill.description}
           </p>
-          <p className="font-[var(--font-lexend)] font-light text-[12px] text-[var(--neutral-text-muted)]">
+          <p className="font-[var(--font-lexend)] font-light text-xs text-[var(--neutral-text-muted)]">
             {bill.dueDate}
           </p>
         </div>
         <div className="flex items-center justify-end gap-2 shrink-0">
-          <p className="font-[var(--font-lexend)] font-normal text-[14px] text-[var(--neutral-text-strong)] tabular-nums">
+          <p className="font-[var(--font-lexend)] font-normal text-sm text-[var(--neutral-text-strong)] tabular-nums">
             {bill.amount}
           </p>
           <span
             className={`${statusStyle.bg} ${statusStyle.text} flex items-center justify-center px-3 py-0.5 rounded-[var(--radius-md)] shrink-0`}
           >
-            <span className="font-[var(--font-lexend)] font-light text-[12px] leading-normal">
+            <span className="font-[var(--font-lexend)] font-light text-xs leading-normal">
               {bill.status}
             </span>
           </span>

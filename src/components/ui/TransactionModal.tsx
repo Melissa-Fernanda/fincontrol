@@ -120,7 +120,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
           <button
             type="button"
             onClick={onClose}
-            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-sm font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
           >
             Cancelar
           </button>
@@ -129,7 +129,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
             onClick={handleSubmit}
             disabled={!isValid}
             className={cn(
-              "flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-[14px] font-normal rounded-[var(--radius-md)] transition-colors",
+              "flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-sm font-normal rounded-[var(--radius-md)] transition-colors",
               isValid
                 ? isExpense
                   ? "bg-[var(--feedback-error-base)] hover:bg-[var(--feedback-error-dark)]"
@@ -159,7 +159,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                 />
                 <span
                   className={cn(
-                    "text-[14px]",
+                    "text-sm",
                     isExpense ? "text-[var(--feedback-error-base)] font-normal" : "text-[var(--neutral-text-muted)] font-normal"
                   )}
                 >
@@ -181,7 +181,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                 />
                 <span
                   className={cn(
-                    "text-[14px]",
+                    "text-sm",
                     !isExpense ? "text-[var(--feedback-success-base)] font-normal" : "text-[var(--neutral-text-muted)] font-normal"
                   )}
                 >
@@ -191,14 +191,14 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
             </div>
 
             {/* Amount Input */}
-            <div className="w-full h-fit pt-2 pb-8 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
+            <div className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
               <Icon icon={Wallet01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
               <input
                 type="text"
                 placeholder="0,00"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full bg-transparent text-[14px] text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
+                className="w-full bg-transparent text-sm text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
               />
             </div>
 
@@ -213,7 +213,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                 className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 cursor-pointer hover:bg-[var(--neutral-75)] transition-colors"
               >
                 <Icon icon={Tag01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                <span className={cn("flex-1 text-left text-[14px] font-light truncate", category ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]")}>
+                <span className={cn("flex-1 text-left text-sm font-light truncate", category ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]")}>
                   {category || "Selecione uma categoria"}
                 </span>
                 <Icon icon={ArrowDown01Icon} size={16} className={cn("shrink-0 text-[var(--neutral-icons-muted)] transition-transform", categoryOpen && "rotate-180")} />
@@ -228,7 +228,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                         setCategory(c);
                         setCategoryOpen(false);
                       }}
-                      className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                      className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                     >
                       {c}
                     </button>
@@ -258,7 +258,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                   className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 cursor-pointer hover:bg-[var(--neutral-75)] transition-colors"
                 >
                   <Icon icon={CreditCardIcon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-                  <span className={cn("flex-1 text-left text-[14px] font-light truncate", paymentMethod ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]")}>
+                  <span className={cn("flex-1 text-left text-sm font-light truncate", paymentMethod ? "text-[var(--neutral-700)]" : "text-[var(--neutral-text-muted)]")}>
                     {paymentMethod || "Meio pagamento"}
                   </span>
                   <Icon icon={ArrowDown01Icon} size={16} className={cn("shrink-0 text-[var(--neutral-icons-muted)] transition-transform", paymentOpen && "rotate-180")} />
@@ -273,7 +273,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                           setPaymentMethod(pm);
                           setPaymentOpen(false);
                         }}
-                        className="w-full px-4 py-2.5 text-left text-[14px] font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                        className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
                       >
                         {pm}
                       </button>
@@ -284,26 +284,26 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
             </div>
 
             {/* Nome da transação (despesa/receita) */}
-            <div className="w-full h-fit pt-2 pb-8 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
+            <div className="w-full h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
               <Icon icon={Edit01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
               <input
                 type="text"
                 placeholder="Nome da transação (ex: Almoço, Uber, Mercado...)"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full bg-transparent text-[14px] text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
+                className="w-full bg-transparent text-sm text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
               />
             </div>
 
-            {/* Descrição */}
-            <div className="w-full h-fit pt-2 pb-8 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
-              <Icon icon={Message01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
-              <input
-                type="text"
+            {/* Descrição - área maior para texto livre */}
+            <div className="w-full min-h-[80px] py-3 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-start px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
+              <Icon icon={Message01Icon} size={20} className="shrink-0 mt-0.5 text-[var(--neutral-icons-muted)]" />
+              <textarea
                 placeholder="Ex: Observações, detalhes adicionais..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-transparent text-[14px] text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none"
+                rows={2}
+                className="w-full min-h-[44px] py-2 bg-transparent text-sm text-[var(--neutral-text-black)] placeholder:text-[var(--neutral-text-muted)] font-light outline-none resize-none"
               />
             </div>
           </div>
