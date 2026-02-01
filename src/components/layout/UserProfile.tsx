@@ -25,16 +25,13 @@ export function UserProfile({
   name,
   avatarUrl,
   initials,
-  profileHref = "/perfil",
+  profileHref,
 }: UserProfileProps) {
   const displayInitials = initials ?? getInitials(name);
+  const isClickable = profileHref != null && profileHref !== "";
 
-  return (
-    <div className="group mx-4 mb-4">
-      <Link
-        href={profileHref}
-        className="relative flex items-center gap-3 p-3 rounded-[var(--radius-md)] border border-[var(--neutral-stroke-white)] bg-[var(--neutral-25)] text-[var(--neutral-text-strong)] before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:bg-black/8 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 before:pointer-events-none active:scale-[0.99] transition-all duration-150 ease-out"
-      >
+  const content = (
+    <>
         {/* Avatar */}
         <div className="relative z-10 w-10 h-10 rounded-full shrink-0 overflow-hidden bg-[var(--neutral-stroke-muted)]">
           {avatarUrl ? (
@@ -69,7 +66,26 @@ export function UserProfile({
             />
           </span>
         </div>
-      </Link>
+    </>
+  );
+
+  return (
+    <div className="group mx-4 mb-4">
+      {isClickable ? (
+        <Link
+          href={profileHref}
+          className="relative flex items-center gap-3 p-3 rounded-[var(--radius-md)] border border-[var(--neutral-stroke-white)] bg-[var(--neutral-25)] text-[var(--neutral-text-strong)] before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:bg-black/8 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 before:pointer-events-none active:scale-[0.99] transition-all duration-150 ease-out"
+        >
+          {content}
+        </Link>
+      ) : (
+        <div
+          className="relative flex items-center gap-3 p-3 rounded-[var(--radius-md)] border border-[var(--neutral-stroke-white)] bg-[var(--neutral-25)] text-[var(--neutral-text-strong)] cursor-default opacity-90"
+          aria-disabled="true"
+        >
+          {content}
+        </div>
+      )}
     </div>
   );
 }

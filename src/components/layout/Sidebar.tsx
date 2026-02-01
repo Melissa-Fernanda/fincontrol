@@ -128,7 +128,6 @@ function SidebarContent({ isCollapsed, isLocked, setCollapsed, toggleLock, activ
         <UserProfile
           name="Melissa Fernanda"
           initials="MF"
-          profileHref="/perfil"
         />
       )}
       <nav
