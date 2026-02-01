@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { Icon } from "@/components/ui/Icon";
+import { BottomSheet } from "@/components/ui/BottomSheet";
 import {
   ArrowDown01Icon,
   Calendar01Icon,
@@ -32,9 +33,7 @@ export interface FixedAccountDetailModalProps {
   onMarkAsPaid?: (id: number) => void;
 }
 
-const svgPaths = {
-  closeX: "M18 6L6 18M6 6l12 12",
-};
+const svgPaths = { closeX: "M18 6L6 18M6 6l12 12" };
 
 export function FixedAccountDetailModal({
   open,
@@ -76,27 +75,16 @@ export function FixedAccountDetailModal({
     }
   };
 
+  const hasDirtyChanges = useMemo(() => {
+    if (!item) return false;
+    return date !== item.date || paymentMethod !== item.paymentMethod || recurrence !== item.recurrence;
+  }, [item, date, paymentMethod, recurrence]);
+
   if (!open || !item) return null;
 
-  return (
-    <>
-      <div
-        className="fixed inset-0 z-40 bg-black/30"
-        aria-hidden
-        onClick={onClose}
-      />
-      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 pointer-events-none">
-        <div
-          className="relative w-full max-w-[449px] max-h-[90vh] overflow-y-auto overflow-x-hidden bg-[var(--surface-card)] rounded-t-[var(--radius-xl)] sm:rounded-[var(--radius-xl)] shadow-[var(--shadow-modal)] flex flex-col font-['Lexend'] pointer-events-auto border border-[var(--neutral-100)] sm:max-h-[85vh]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* Borda decorativa interna */}
-          <div className="absolute inset-0 border border-[var(--neutral-100)] pointer-events-none rounded-[var(--radius-xl)]" />
-
-          {/* Header - tema escuro */}
-          <div className="bg-[var(--brand-base)] w-full p-6 pb-8 text-white relative">
-            {/* Linha superior: ícone/título e fechar */}
-            <div className="flex justify-between items-center mb-6">
+  const customHeader = (
+    <div className="bg-[var(--brand-base)] w-full p-6 pb-8 text-white relative shrink-0">
+      <div className="flex justify-between items-center mb-6">
               <div className="flex items-center gap-3 min-w-0">
                 <div className="w-[48px] h-[48px] bg-[var(--fathomgray-800)] rounded-[var(--radius-md)] flex items-center justify-center border border-[var(--fathomgray-700)] shrink-0 overflow-hidden">
                   {IconComponent && (
@@ -112,12 +100,12 @@ export function FixedAccountDetailModal({
                   </span>
                 </div>
               </div>
-              <button
-                type="button"
-                onClick={onClose}
-                className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors shrink-0"
-                aria-label="Fechar"
-              >
+        <button
+          type="button"
+          onClick={onClose}
+          className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors shrink-0"
+          aria-label="Fechar"
+        >
                 <span className="w-full h-full rounded-full bg-[var(--feedback-error-base)]/10 flex items-center justify-center border border-[var(--feedback-error-base)]/10">
                   <svg
                     viewBox="0 0 24 24"
@@ -130,24 +118,48 @@ export function FixedAccountDetailModal({
                   >
                     <path d={svgPaths.closeX} />
                   </svg>
-                </span>
-              </button>
-            </div>
-
-            {/* Card do valor */}
-            <div className="w-full bg-white/[0.08] rounded-[16px] p-3 py-4 flex flex-col items-center border border-white/[0.08] shadow-sm relative overflow-hidden">
-              <div className="absolute inset-0 border border-white/[0.08] rounded-[16px] pointer-events-none" />
+          </span>
+        </button>
+      </div>
+      {/* Card do valor */}
+      <div className="w-full bg-white/[0.08] rounded-[var(--radius-lg)] p-3 py-4 flex flex-col items-center border border-white/[0.08] relative overflow-hidden">
+        <div className="absolute inset-0 border border-white/[0.08] rounded-[var(--radius-lg)] pointer-events-none" />
               <span className="text-[16px] font-normal text-white mb-2">Valor Mensal</span>
               <span className="text-[24px] font-medium text-white mb-3">{item.amount}</span>
               <div className="bg-white/[0.12] px-3 py-1 rounded-[var(--radius-md)] flex items-center gap-1.5">
                 <Icon icon={Calendar01Icon} size={14} className="text-white shrink-0" />
                 <span className="text-[14px] font-light text-white">Em aberto</span>
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
+  );
 
-          {/* Campos do formulário */}
-          <div className="px-6 py-4 flex flex-col gap-2 bg-[var(--surface-card)]">
+  return (
+    <BottomSheet
+      open={open}
+      onClose={onClose}
+      customHeader={customHeader}
+      hasDirtyChanges={hasDirtyChanges}
+      footer={
+        <div className="flex gap-2">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-normal rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            onClick={handleMarkAsPaid}
+            className="flex-[1.5] h-[var(--height-control)] bg-[var(--feedback-success-base)] text-white text-[14px] font-normal rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[var(--feedback-success-dark)] transition-colors shadow-sm border border-[var(--feedback-success-base)]/10"
+          >
+            Marcar como Paga
+          </button>
+        </div>
+      }
+    >
+      <div className="flex flex-col gap-2 -mx-6 px-6">
             <DatePicker
               value={date}
               onChange={setDate}
@@ -222,26 +234,6 @@ export function FixedAccountDetailModal({
               )}
             </div>
           </div>
-
-          {/* Rodapé - botões */}
-          <div className="p-6 pt-2 flex gap-2 bg-[var(--surface-input)] mt-auto">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-normal rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
-            >
-              Cancelar
-            </button>
-            <button
-              type="button"
-              onClick={handleMarkAsPaid}
-              className="flex-[1.5] h-[var(--height-control)] bg-[var(--feedback-success-base)] text-white text-[14px] font-normal rounded-[var(--radius-md)] flex items-center justify-center hover:bg-[var(--feedback-success-dark)] transition-colors shadow-sm border border-[var(--feedback-success-base)]/10"
-            >
-              Marcar como Paga
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
+    </BottomSheet>
   );
 }

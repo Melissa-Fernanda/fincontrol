@@ -42,16 +42,16 @@ export default function ContasFixasPage() {
 
   return (
     <>
-      <div className="mb-6 shrink-0">
-        <h1 className="text-[32px] font-semibold text-[var(--neutral-text-black)]">
+      <div className="mb-4 sm:mb-6 shrink-0">
+        <h1 className="text-[24px] sm:text-[32px] font-semibold text-[var(--neutral-text-black)]">
           Contas Fixas
         </h1>
-        <p className="mt-2 text-[var(--neutral-text-muted)]">
+        <p className="mt-1 sm:mt-2 text-[14px] sm:text-base text-[var(--neutral-text-muted)]">
           Gerencie suas contas recorrentes e acompanhe os vencimentos mensais.
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-4 w-full min-w-0 items-stretch shrink-0">
+      <div className="flex flex-col md:flex-row gap-3 sm:gap-4 w-full min-w-0 items-stretch shrink-0">
         <BalanceCard
           title="Total Comprometido"
           balance={totalComprometido}

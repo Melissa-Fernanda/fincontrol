@@ -154,7 +154,7 @@ export function Example4() {
     },
   };
 
-  return <FinancialStats data={data} />;
+  return <FinancialStats data={fetchedData} />;
 }
 
 // Funções auxiliares (exemplo)

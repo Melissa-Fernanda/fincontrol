@@ -18,19 +18,19 @@ export default function Home() {
 
   return (
     <>
-      <div className="mb-6">
-        <h1 className="text-[32px] font-semibold text-[var(--neutral-text-black)]">
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-[24px] sm:text-[32px] font-semibold text-[var(--neutral-text-black)]">
           Dashboard
         </h1>
-        <p className="mt-2 text-[var(--neutral-text-muted)]">
+        <p className="mt-1 sm:mt-2 text-[14px] sm:text-base text-[var(--neutral-text-muted)]">
           Bem-vindo ao FinControl. Visão geral das suas finanças.
         </p>
       </div>
 
       <FinancialStats data={financialData} />
 
-      <div className="mt-6 flex flex-col lg:flex-row gap-6 items-stretch min-h-[300px] sm:min-h-[400px] lg:min-h-[480px] lg:h-[480px]">
-        <div className="flex-1 min-w-0 min-h-0 h-full">
+      <div className="mt-4 sm:mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-stretch w-full min-w-0">
+        <div className="min-w-0 min-h-[280px] sm:min-h-[320px] lg:min-h-[400px] w-full">
           <HorizontalBarChart
             data={categoryChartData}
             onViewDetails={() => router.push("/transacoes")}
@@ -41,11 +41,11 @@ export default function Home() {
           bills={upcomingBillsForDashboard}
           onViewDetails={() => router.push("/contas-fixas")}
           itemHref="/contas-fixas"
-          className="h-full"
+          className="w-full min-h-0"
         />
       </div>
 
-      <div className="mt-6">
+      <div className="mt-4 sm:mt-6">
         <RecentTransactions
           transactions={recentTransactionsForDashboard}
           onViewDetails={() => router.push("/transacoes")}

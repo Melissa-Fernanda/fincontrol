@@ -1,7 +1,14 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 import { Icon } from "@/components/ui/Icon";
+import { BottomSheet } from "@/components/ui/BottomSheet";
+
+function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
 import {
   Wallet01Icon,
   Tag01Icon,
@@ -11,10 +18,6 @@ import {
   CreditCardIcon,
 } from "@/components/icons";
 import { DatePicker } from "@/components/ui/DatePicker";
-
-const svgPaths = {
-  closeX: "M18 6L6 18M6 6l12 12",
-};
 
 const CATEGORIES = [
   "Moradia",
@@ -103,43 +106,50 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
     onClose();
   };
 
+  const isValid = useMemo(() => {
+    const t = name.trim();
+    const a = amount.trim().replace(",", ".").replace(/\s/g, "");
+    const parsed = parseFloat(a);
+    return t.length > 0 && !Number.isNaN(parsed) && parsed > 0;
+  }, [name, amount]);
+  const hasDirtyChanges = useMemo(
+    () => !!(name || category || amount || recurrence || date || paymentMethod),
+    [name, category, amount, recurrence, date, paymentMethod]
+  );
+
   if (!open) return null;
 
   return (
-    <>
-      <div
-        className="fixed inset-0 z-40 bg-black/30"
-        aria-hidden
-        onClick={onClose}
-      />
-      <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 pointer-events-none">
-        <div
-          className="bg-[var(--surface-card)] w-full max-w-[480px] max-h-[90vh] overflow-y-auto overflow-x-hidden border border-[var(--neutral-100)] shadow-[var(--shadow-modal)] relative font-['Lexend'] pointer-events-auto rounded-t-[var(--radius-xl)] sm:rounded-[var(--radius-xl)] sm:max-h-[85vh]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* Header */}
-          <div className="flex flex-row items-center p-6 gap-2">
-            <div className="flex-1 flex flex-col items-start min-w-0">
-              <h2 className="text-[var(--neutral-text-black)] text-[20px] font-medium">
-                {initialData ? "Editar Conta Fixa" : "Adicionar Conta Fixa"}
-              </h2>
-              <p className="text-[var(--neutral-text-muted)] text-[14px] font-light mt-1">
-                Previsibilidade para seus pagamentos recorrentes.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="w-8 h-8 shrink-0 hover:bg-[var(--feedback-error-base)]/10 rounded-full transition-colors flex items-center justify-center"
-              aria-label="Fechar"
-            >
-              <svg viewBox="0 0 24 24" className="w-5 h-5 text-[var(--feedback-error-base)]" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none">
-                <path d={svgPaths.closeX} />
-              </svg>
-            </button>
-          </div>
-
-          <div className="px-6 pb-6 gap-3 flex flex-col">
+    <BottomSheet
+      open={open}
+      onClose={onClose}
+      title={initialData ? "Editar Conta Fixa" : "Adicionar Conta Fixa"}
+      subtitle="Previsibilidade para seus pagamentos recorrentes."
+      hasDirtyChanges={hasDirtyChanges}
+      footer={
+        <div className="flex gap-2 items-center">
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={!isValid}
+            className={cn(
+              "flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-[14px] font-normal rounded-[var(--radius-md)] transition-colors",
+              isValid ? "bg-[var(--brand-base)] hover:opacity-90" : "bg-[var(--neutral-300)] cursor-not-allowed opacity-60"
+            )}
+          >
+            {initialData ? "Salvar alterações" : "Salvar Conta"}
+          </button>
+        </div>
+      }
+    >
+      <div className="gap-3 flex flex-col pb-4">
             {/* Descrição / Nome - full width */}
             <div className="w-full h-fit py-2 px-4 rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
               <Icon icon={Edit01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
@@ -281,26 +291,6 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
               )}
             </div>
           </div>
-
-          {/* Footer */}
-          <div className="w-full bg-[var(--surface-input)] p-6 flex gap-2 items-center border-t border-[var(--neutral-100)]">
-            <button
-              type="button"
-              onClick={onClose}
-              className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
-            >
-              Cancelar
-            </button>
-            <button
-              type="button"
-              onClick={handleSubmit}
-              className="flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-[14px] font-normal rounded-[var(--radius-md)] bg-[var(--brand-base)] hover:opacity-90 transition-colors"
-            >
-              {initialData ? "Salvar alterações" : "Salvar Conta"}
-            </button>
-          </div>
-        </div>
-      </div>
-    </>
+    </BottomSheet>
   );
 }

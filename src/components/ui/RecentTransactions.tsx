@@ -45,13 +45,13 @@ export function RecentTransactions({
 }: RecentTransactionsProps) {
   return (
     <div
-      className={`bg-[var(--surface-card)] relative rounded-[var(--radius-lg)] w-full border border-[var(--neutral-100)] shadow-[var(--shadow-card)] min-h-[400px] flex flex-col ${className}`}
+      className={`bg-[var(--surface-card)] relative rounded-[var(--radius-lg)] w-full border border-[var(--neutral-100)] shadow-[var(--shadow-card)] flex flex-col min-h-0 ${className}`}
     >
       <div
         aria-hidden="true"
         className="absolute border border-[var(--neutral-100)] inset-0 pointer-events-none rounded-[var(--radius-lg)]"
       />
-      <div className="flex flex-col gap-4 p-4 rounded-[inherit] w-full flex-1 min-h-0 z-10">
+      <div className="flex flex-col gap-4 p-4 rounded-[inherit] w-full flex-1 min-h-0 overflow-hidden z-10">
         <div className="flex items-center justify-between shrink-0 w-full">
           <h2 className="font-[var(--font-lexend)] font-normal text-[18px] leading-[1.4] text-[var(--neutral-text-black)]">
             Transações Recentes
@@ -79,7 +79,7 @@ export function RecentTransactions({
             </button>
           )}
         </div>
-        <div className="flex flex-1 min-h-0 flex-col gap-2 items-start w-full overflow-y-auto">
+        <div className="flex flex-1 min-h-0 flex-col gap-2 items-start w-full overflow-y-auto max-h-[200px] sm:max-h-[280px] md:max-h-none">
           {transactions.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center py-4 px-4 text-center w-full">
               <p className="text-[16px] font-medium text-[var(--neutral-text-black)]">

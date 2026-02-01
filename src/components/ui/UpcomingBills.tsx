@@ -41,9 +41,9 @@ export function UpcomingBills({
 }: UpcomingBillsProps) {
   return (
     <div
-      className={`bg-[var(--surface-card)] relative rounded-[var(--radius-lg)] w-full max-w-[400px] min-w-0 shrink-0 flex flex-col min-h-0 h-full border border-[var(--neutral-100)] shadow-[var(--shadow-card)] ${className}`}
+      className={`bg-[var(--surface-card)] relative rounded-[var(--radius-lg)] w-full lg:max-w-[400px] min-w-0 flex flex-col min-h-[200px] border border-[var(--neutral-100)] shadow-[var(--shadow-card)] ${className}`}
     >
-      <div className="flex min-w-0 flex-col gap-4 p-4 rounded-[inherit] w-full flex-1 overflow-hidden h-full">
+      <div className="flex min-w-0 flex-col gap-4 p-4 rounded-[inherit] w-full flex-1 overflow-hidden min-h-0">
         {/* Header */}
         <div className="flex items-center justify-between shrink-0 w-full">
           <h2 className="font-[var(--font-lexend)] font-normal text-[18px] leading-[1.4] text-[var(--neutral-text-black)]">
@@ -72,8 +72,8 @@ export function UpcomingBills({
             </button>
           )}
         </div>
-        {/* Bills List */}
-        <div className="flex flex-1 min-h-0 flex-col gap-2 items-start w-full overflow-y-auto">
+        {/* Bills List - scroll interno no mobile para evitar layout infinito */}
+        <div className="flex flex-1 min-h-0 flex-col gap-2 items-start w-full overflow-y-auto max-h-[200px] sm:max-h-[260px] lg:max-h-none">
           {bills.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center py-4 px-4 text-center w-full">
               <p className="text-[16px] font-medium text-[var(--neutral-text-black)]">

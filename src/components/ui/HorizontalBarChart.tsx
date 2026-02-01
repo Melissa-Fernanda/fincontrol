@@ -53,7 +53,7 @@ export function HorizontalBarChart({
 
   return (
     <div
-      className={`w-full h-full min-h-0 flex flex-col bg-[var(--surface-card)] rounded-[var(--radius-lg)] border border-[var(--neutral-100)] p-6 shadow-[var(--shadow-card)] ${className}`}
+      className={`w-full h-full min-h-0 flex flex-col bg-[var(--surface-card)] rounded-[var(--radius-lg)] border border-[var(--neutral-100)] p-4 sm:p-6 shadow-[var(--shadow-card)] ${className}`}
     >
       {/* Header - altura fixa */}
       <div className="flex items-center justify-between gap-4 mb-4 shrink-0">
@@ -105,7 +105,7 @@ export function HorizontalBarChart({
         ) : (
           <>
             {/* X-Axis Scale Labels */}
-            <div className="flex justify-between w-full pl-[100px] mb-1 shrink-0">
+            <div className="flex justify-between w-full pl-[min(100px,28vw)] sm:pl-[100px] mb-1 shrink-0 min-w-0">
               {[0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].map((val) => (
                 <div key={val} className="w-0 flex justify-center">
                   <span className="text-[12px] text-[var(--neutral-text-muted)]">{val}</span>
@@ -116,7 +116,7 @@ export function HorizontalBarChart({
             {/* Chart Body - preenche o espaço restante */}
             <div className="relative flex-1 min-h-0 flex flex-col">
               {/* Vertical Grid Lines */}
-              <div className="absolute inset-0 left-[100px] flex justify-between pointer-events-none">
+              <div className="absolute inset-0 left-[min(100px,28vw)] sm:left-[100px] flex justify-between pointer-events-none">
                 {Array.from({ length: 11 }).map((_, i) => (
                   <div
                     key={i}
@@ -135,8 +135,8 @@ export function HorizontalBarChart({
                 onMouseLeave={handleMouseLeave}
               >
                 {/* Category Label */}
-                <div className="w-[100px] pr-4 text-right shrink-0">
-                  <span className="text-[12px] text-[var(--neutral-text-muted)]">
+                <div className="w-[min(100px,28vw)] sm:w-[100px] pr-2 sm:pr-4 text-right shrink-0 min-w-0 overflow-hidden">
+                  <span className="text-[12px] text-[var(--neutral-text-muted)] truncate block">
                     {item.category}
                   </span>
                 </div>

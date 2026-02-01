@@ -4,6 +4,8 @@ import { useMemo, useState, useRef, useEffect } from "react";
 import { Icon } from "@/components/ui/Icon";
 import { DatePicker } from "@/components/ui/DatePicker";
 import { TransactionModal } from "@/components/ui/TransactionModal";
+import { ConfirmModal } from "@/components/ui/ConfirmModal";
+import { BottomSheet } from "@/components/ui/BottomSheet";
 import {
   Search01Icon,
   Tag01Icon,
@@ -53,7 +55,9 @@ export function TransactionsTable() {
   const [dateEnd, setDateEnd] = useState("");
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [dateOpen, setDateOpen] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
   const categoryRef = useRef<HTMLDivElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
 
@@ -111,9 +115,9 @@ export function TransactionsTable() {
   return (
     <div className="w-full h-full min-h-0 min-w-0 bg-[var(--surface-card)] rounded-[var(--radius-lg)] border border-[var(--neutral-100)] shadow-[var(--shadow-card)] overflow-hidden flex flex-col font-['Lexend']">
       {/* Header Filters */}
-      <div className="p-4 flex flex-wrap items-center gap-[10px] w-full border-b border-[var(--neutral-75)] shrink-0">
-        {/* Search */}
-        <div className="flex-1 min-w-[200px] h-[var(--height-control)] relative bg-[var(--surface-input)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:border-[var(--neutral-stroke-muted)] transition-colors">
+      <div className="p-4 flex flex-wrap items-center gap-2 sm:gap-[10px] w-full border-b border-[var(--neutral-75)] shrink-0">
+        {/* Search - full width on mobile */}
+        <div className="flex-1 min-w-0 sm:min-w-[200px] h-[var(--height-control)] relative bg-[var(--surface-input)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:border-[var(--neutral-stroke-muted)] transition-colors">
           <Icon icon={Search01Icon} size={20} className="text-[var(--neutral-icons-muted)] shrink-0" />
           <input
             type="text"
@@ -124,8 +128,18 @@ export function TransactionsTable() {
           />
         </div>
 
-        {/* Category Dropdown */}
-        <div className="relative" ref={categoryRef}>
+        {/* Mobile: Filtrar button */}
+        <button
+          type="button"
+          onClick={() => setFiltersOpen(true)}
+          className="md:hidden h-[var(--height-control)] px-4 bg-[var(--surface-input)] rounded-[var(--radius-md)] border border-[var(--neutral-100)] flex items-center gap-2 text-[var(--neutral-text-muted)] hover:bg-[var(--neutral-75)]"
+        >
+          <Icon icon={Tag01Icon} size={20} className="shrink-0" />
+          <span className="text-[14px] font-light">Filtrar</span>
+        </button>
+
+        {/* Desktop: Category Dropdown */}
+        <div className="relative hidden md:block" ref={categoryRef}>
           <button
             type="button"
             onClick={() => {
@@ -169,8 +183,8 @@ export function TransactionsTable() {
           )}
         </div>
 
-        {/* Date Range */}
-        <div className="relative" ref={dateRef}>
+        {/* Desktop: Date Range */}
+        <div className="relative hidden md:block" ref={dateRef}>
           <button
             type="button"
             onClick={() => {
@@ -219,16 +233,122 @@ export function TransactionsTable() {
           )}
         </div>
 
-        {/* New Transaction Button */}
+        {/* New Transaction Button - desktop only */}
         <button
           type="button"
           onClick={() => setModalOpen(true)}
-          className="h-[var(--height-control)] px-4 bg-[var(--brand-base)] rounded-[var(--radius-md)] flex items-center gap-2 text-white hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)]"
+          className="hidden md:flex h-[var(--height-control)] px-4 bg-[var(--brand-base)] rounded-[var(--radius-md)] items-center gap-2 text-white hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)]"
         >
           <Icon icon={Add01Icon} size={20} className="shrink-0" />
           <span className="text-[14px] font-normal">Nova Transação</span>
         </button>
       </div>
+
+      {/* Mobile: Filters Bottom Sheet */}
+      <BottomSheet
+        open={filtersOpen}
+        onClose={() => setFiltersOpen(false)}
+        title="Filtros"
+        subtitle="Filtre por categoria e período"
+        footer={
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                setCategoryFilter(CATEGORY_ALL);
+                setDateStart("");
+                setDateEnd("");
+                setFiltersOpen(false);
+              }}
+              className="flex-1 h-[var(--height-control)] flex items-center justify-center text-[var(--neutral-text-muted)] text-[14px] font-light rounded-[var(--radius-md)] hover:bg-[var(--neutral-100)] transition-colors"
+            >
+              Limpar
+            </button>
+            <button
+              type="button"
+              onClick={() => setFiltersOpen(false)}
+              className="flex-[1.5] h-[var(--height-control)] flex items-center justify-center text-white text-[14px] font-normal rounded-[var(--radius-md)] bg-[var(--brand-base)] hover:opacity-90 transition-colors"
+            >
+              Aplicar
+            </button>
+          </div>
+        }
+      >
+        <div className="flex flex-col gap-4 pb-4">
+          <div>
+            <label className="block text-[12px] font-light text-[var(--neutral-text-muted)] mb-1.5">Categoria</label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setCategoryFilter(CATEGORY_ALL)}
+                className={`px-3 py-2 rounded-[var(--radius-md)] text-[14px] font-light transition-colors ${
+                  categoryFilter === CATEGORY_ALL
+                    ? "bg-[var(--brand-base)] text-white"
+                    : "bg-[var(--surface-input)] border border-[var(--neutral-100)] text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                }`}
+              >
+                Todas
+              </button>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setCategoryFilter(cat)}
+                  className={`px-3 py-2 rounded-[var(--radius-md)] text-[14px] font-light transition-colors ${
+                    categoryFilter === cat
+                      ? "bg-[var(--brand-base)] text-white"
+                      : "bg-[var(--surface-input)] border border-[var(--neutral-100)] text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <label className="text-[12px] font-light text-[var(--neutral-text-muted)]">Período</label>
+            <div className="flex flex-col gap-2">
+              <DatePicker
+                id="filters-date-start"
+                value={dateStart}
+                onChange={setDateStart}
+                placeholder="Data inicial"
+              />
+              <DatePicker
+                id="filters-date-end"
+                value={dateEnd}
+                onChange={setDateEnd}
+                placeholder="Data final"
+              />
+            </div>
+          </div>
+        </div>
+      </BottomSheet>
+
+      {/* Mobile: FAB Nova Transação */}
+      <button
+        type="button"
+        onClick={() => setModalOpen(true)}
+        className="md:hidden fixed bottom-6 right-6 z-30 w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-[var(--brand-base)] text-white shadow-[var(--shadow-modal)] flex items-center justify-center hover:opacity-90 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
+        aria-label="Adicionar transação"
+      >
+        <Icon icon={Add01Icon} size={24} />
+      </button>
+
+      <ConfirmModal
+        open={deleteConfirmId != null}
+        title="Excluir transação?"
+        message="Esta ação não pode ser desfeita. A transação será removida da lista."
+        confirmLabel="Excluir"
+        onConfirm={() => {
+          if (deleteConfirmId) {
+            deleteTransaction(deleteConfirmId);
+            setDeleteConfirmId(null);
+          }
+        }}
+        onCancel={() => setDeleteConfirmId(null)}
+        variant="danger"
+      />
 
       <TransactionModal
         open={modalOpen}
@@ -249,15 +369,22 @@ export function TransactionsTable() {
 
       {/* Table wrapper: scroll horizontal quando necessário */}
       <div className="flex-1 min-h-0 min-w-0 flex flex-col overflow-hidden">
-        <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto p-4 flex flex-col gap-2 bg-[var(--surface-input)]">
+        <div className="flex-1 min-h-0 overflow-y-auto overflow-x-auto p-4 pb-24 md:pb-4 flex flex-col gap-2 bg-[var(--surface-input)]">
           {filteredTransactions.length === 0 ? (
             <div className="flex flex-1 min-h-0 flex-col items-center justify-center py-12 pt-4 px-4 text-center">
-              <p className="text-[18px] font-medium text-[var(--neutral-text-black)]">
+              <p className="text-[16px] sm:text-[18px] font-medium text-[var(--neutral-text-black)]">
                 Nenhuma transação cadastrada
               </p>
-              <p className="mt-2 text-[14px] font-light text-[var(--neutral-text-muted)] max-w-[480px]">
+              <p className="mt-2 text-[13px] sm:text-[14px] font-light text-[var(--neutral-text-muted)] max-w-[480px]">
                 Adicione sua primeira transação para acompanhar entradas e saídas e manter suas finanças em dia.
               </p>
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-[14px] font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
+              >
+                Adicionar transação
+              </button>
               <div className="mt-6 flex flex-1 min-h-0 w-full items-center justify-center">
                 <img
                   src="/images/sem-transacoes.svg"
@@ -269,7 +396,7 @@ export function TransactionsTable() {
           ) : (
             <>
               {/* Desktop: Table view */}
-              <div className="hidden md:block flex-1 min-h-0 overflow-x-auto">
+              <div className="hidden md:flex flex-1 min-h-0 overflow-x-auto flex-col gap-2">
               {/* Column Titles */}
               <div className="grid grid-cols-[minmax(140px,1fr)_70px_90px_minmax(80px,1fr)_90px_72px] gap-x-3 gap-y-0 items-center py-[10px] px-4 bg-[var(--neutral-75)] rounded-t-[var(--radius-md)] text-[var(--neutral-text-muted)] text-[14px] font-normal shrink-0 min-w-[560px]">
                 <div className="min-w-0 truncate">Descrição / Categoria</div>
@@ -343,7 +470,7 @@ export function TransactionsTable() {
                 </button>
 <button
                 type="button"
-                onClick={() => deleteTransaction(tx.id)}
+                onClick={() => setDeleteConfirmId(tx.id)}
                 className="text-[var(--neutral-icons-muted)] hover:text-[var(--feedback-error-base)] transition-colors p-0.5"
                 aria-label="Excluir"
               >
@@ -404,7 +531,7 @@ export function TransactionsTable() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => deleteTransaction(tx.id)}
+                          onClick={() => setDeleteConfirmId(tx.id)}
                           className="p-2 text-[var(--neutral-icons-muted)] hover:text-[var(--feedback-error-base)] transition-colors rounded-[var(--radius-md)]"
                           aria-label="Excluir"
                         >

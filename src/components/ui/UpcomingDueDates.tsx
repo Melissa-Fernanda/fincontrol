@@ -88,10 +88,10 @@ function DueDateItem({
             <p className="font-['Lexend'] font-normal text-[var(--neutral-700)] text-[14px] leading-normal">
               {amount}
             </p>
-            <div className="flex min-w-[90px] justify-end gap-3">
+            <div className="flex min-w-[90px] justify-end gap-1">
               <button
                 type="button"
-                className="text-[var(--neutral-icons-muted)] hover:text-[var(--brand-base)] transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[var(--neutral-icons-muted)] hover:text-[var(--brand-base)] transition-colors rounded-[var(--radius-md)]"
                 aria-label="Editar"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -102,7 +102,7 @@ function DueDateItem({
               </button>
               <button
                 type="button"
-                className="text-[var(--neutral-icons-muted)] hover:text-[var(--feedback-error-base)] transition-colors"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center p-2 text-[var(--neutral-icons-muted)] hover:text-[var(--feedback-error-base)] transition-colors rounded-[var(--radius-md)]"
                 aria-label="Excluir"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -195,7 +195,7 @@ export function UpcomingDueDates() {
 
   return (
     <div className="w-full h-full flex flex-col min-h-0 min-w-0">
-      <div className="w-full flex-1 min-h-0 bg-[var(--surface-card)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] border border-[var(--neutral-100)] p-0 flex flex-col gap-[16px]">
+      <div className="w-full flex-1 min-h-0 bg-[var(--surface-card)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] border border-[var(--neutral-100)] p-0 flex flex-col gap-4">
         <div className="flex items-center justify-between w-full shrink-0 pt-4 px-4">
           <h2 className="font-['Lexend'] font-normal text-[var(--neutral-text-black)] text-[18px] leading-[1.4]">
             Próximos Vencimentos
@@ -216,13 +216,20 @@ export function UpcomingDueDates() {
         <div className="w-full flex-1 min-h-0 overflow-y-auto">
           {items.length === 0 ? (
             <div className="flex flex-1 flex-col items-center justify-center py-12 px-4 text-center h-full">
-              <p className="text-[18px] font-medium text-[var(--neutral-text-black)]">
+              <p className="text-[16px] sm:text-[18px] font-medium text-[var(--neutral-text-black)]">
                 Nenhuma conta fixa cadastrada
               </p>
-              <p className="mt-2 text-[14px] font-light text-[var(--neutral-text-muted)] max-w-[480px]">
+              <p className="mt-2 text-[13px] sm:text-[14px] font-light text-[var(--neutral-text-muted)] max-w-[480px]">
                 Cadastre suas contas recorrentes (aluguel, luz, assinaturas) para acompanhar vencimentos e planejar seu orçamento.
               </p>
-              <div className="mt-6 flex-1 min-h-0 flex items-center justify-center w-full">
+              <button
+                type="button"
+                onClick={() => setModalOpen(true)}
+                className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-[14px] font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
+              >
+                Adicionar conta fixa
+              </button>
+              <div className="mt-6 flex flex-1 min-h-0 items-center justify-center w-full">
                 <img
                   src="/images/sem-conta-fixa.svg"
                   alt=""
@@ -232,7 +239,7 @@ export function UpcomingDueDates() {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-[8px] pt-2 pb-4 px-4">
+            <div className="flex flex-col gap-2 pt-2 pb-4 px-4">
               {items.map((item) => (
                 <div key={item.id} className="min-w-0">
                   <DueDateItem

@@ -4,7 +4,8 @@
  * Componente de gráfico de barras horizontais para visualização de dados categóricos.
  */
 
-import { HorizontalBarChart, DEFAULT_CATEGORY_DATA } from "./HorizontalBarChart";
+import { useState, useEffect } from "react";
+import { HorizontalBarChart, DEFAULT_CATEGORY_DATA, type CategoryData as ChartCategoryData } from "./HorizontalBarChart";
 
 // ============================================
 // Exemplo 1: Uso básico com dados padrão
@@ -124,10 +125,10 @@ export function Example5() {
 // ============================================
 export function Example6() {
   // Em um componente real, você usaria useState e useEffect
-  const [data, setData] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
+  const [data, setData] = useState<ChartCategoryData[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     fetchCategoryData()
       .then(setData)
       .finally(() => setLoading(false));
@@ -159,7 +160,7 @@ function calculatePercentage(category: string): number {
   return values[category] || 0;
 }
 
-async function fetchCategoryData() {
+async function fetchCategoryData(): Promise<ChartCategoryData[]> {
   // Simula chamada de API
   return new Promise((resolve) => {
     setTimeout(() => {

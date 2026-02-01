@@ -22,12 +22,12 @@ export function BalanceCard({
   icon = <WalletIcon className="w-6 h-6 text-white" />
 }: BalanceCardProps) {
   return (
-    <div className="bg-[var(--brand-base)] rounded-2xl shadow-[var(--shadow-card)] p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] overflow-hidden">
+    <div className="bg-[var(--brand-base)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] overflow-hidden">
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
-        <p className="font-light text-sm text-white truncate">{title}</p>
+        <p className="font-light text-sm text-white truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>
       </div>
-      <p className="font-medium text-2xl text-white truncate">{balance}</p>
+      <p className="font-medium text-[18px] sm:text-2xl text-white tabular-nums break-words min-w-0 overflow-visible">{balance}</p>
       {badge && (
         <Badge variant={badge.variant || "neutral"} className="bg-white/10 text-white truncate max-w-full">
           {badge.text}
@@ -54,12 +54,12 @@ export function RevenueCard({
   icon = <RevenueIcon className="w-6 h-6" />
 }: RevenueCardProps) {
   return (
-    <div className="bg-[var(--neutral-25)] rounded-2xl shadow-[var(--shadow-card)] p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] border border-[var(--neutral-100)] overflow-hidden">
+    <div className="bg-[var(--neutral-25)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] border border-[var(--neutral-100)] overflow-hidden">
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
-        <p className="font-light text-sm text-[var(--neutral-700)] truncate">{title}</p>
+        <p className="font-light text-sm text-[var(--neutral-700)] truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>
       </div>
-      <p className="font-medium text-2xl text-[var(--neutral-950)] truncate">{amount}</p>
+      <p className="font-medium text-[18px] sm:text-2xl text-[var(--neutral-950)] tabular-nums break-words min-w-0 overflow-visible">{amount}</p>
       {badge && (
         <Badge variant={badge.variant || "neutral"} className="bg-[var(--neutral-75)] truncate max-w-full">
           {badge.text}
@@ -88,12 +88,12 @@ export function ExpensesCard({
   icon = <ExpensesIcon className="w-6 h-6" />
 }: ExpensesCardProps) {
   return (
-    <div className="bg-[var(--neutral-25)] rounded-2xl shadow-[var(--shadow-card)] p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] border border-[var(--neutral-100)] overflow-hidden">
+    <div className="bg-[var(--neutral-25)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] border border-[var(--neutral-100)] overflow-hidden">
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
-        <p className="font-light text-sm text-[var(--neutral-700)] truncate">{title}</p>
+        <p className="font-light text-sm text-[var(--neutral-700)] truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>
       </div>
-      <p className="font-medium text-2xl text-[var(--neutral-950)] truncate">{amount}</p>
+      <p className="font-medium text-[18px] sm:text-2xl text-[var(--neutral-950)] tabular-nums break-words min-w-0 overflow-visible">{amount}</p>
       {alert && (
         <Badge
           variant={alert.variant || "error"}
@@ -141,7 +141,7 @@ interface FinancialStatsProps {
 
 export function FinancialStats({ data }: FinancialStatsProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-4 w-full min-w-0 items-stretch">
+    <div className="flex flex-col md:flex-row gap-3 sm:gap-4 w-full min-w-0 items-stretch">
       <BalanceCard 
         balance={data.balance.amount} 
         badge={data.balance.badge}
