@@ -136,8 +136,8 @@ export function BottomSheet({
       >
         <div
           ref={panelRef}
-          className={`
-            bg-[var(--surface-card)] w-full max-w-[480px] max-h-[90vh] sm:max-h-[85vh]
+            className={`
+            bg-[var(--surface-card)] w-full max-w-[480px] max-h-[var(--sheet-max-h)] sm:max-h-[var(--sheet-max-h-sm)]
             overflow-hidden border border-[var(--neutral-100)] shadow-[var(--shadow-modal)]
             relative font-['Lexend'] pointer-events-auto
             rounded-t-[var(--radius-xl)] sm:rounded-[var(--radius-xl)]
@@ -200,7 +200,7 @@ export function BottomSheet({
           )}
 
           {/* Body - scrollable ou confirmar descarte */}
-          <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-6">
+          <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-touch px-6">
             {showDiscardConfirm ? (
               <div className="py-6 flex flex-col gap-4">
                 <p className="text-[var(--neutral-700)] text-[14px] font-light">
@@ -229,7 +229,7 @@ export function BottomSheet({
           </div>
 
           {!showDiscardConfirm && (
-            <div className="shrink-0 border-t border-[var(--neutral-100)] bg-[var(--surface-input)] p-4">
+            <div className="shrink-0 border-t border-[var(--neutral-100)] bg-[var(--surface-input)] px-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom,0))]">
               {footer}
             </div>
           )}

@@ -2,9 +2,32 @@
 @import "tailwindcss";
 @import "../../tailwind/theme.css";
 
+/* iOS Safari viewport fix - evita layout quebrado com barra do Safari */
 :root {
+  --app-height: 100vh;
   --background: var(--neutral-static-white);
   --foreground: var(--neutral-text-black);
+}
+
+:root {
+  --sheet-max-h: 90vh;
+  --sheet-max-h-sm: 85vh;
+}
+
+@supports (height: 100dvh) {
+  :root {
+    --app-height: 100dvh;
+    --sheet-max-h: 90dvh;
+    --sheet-max-h-sm: 85dvh;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  html,
+  body {
+    height: -webkit-fill-available;
+    min-height: -webkit-fill-available;
+  }
 }
 
 @theme inline {
@@ -25,6 +48,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Safe areas para notch/home indicator (iOS) */
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* FAB e elementos fixos no bottom - respeitam home indicator */
+.fab-bottom {
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0));
+}
+
+/* Scroll suave em containers (iOS Safari) */
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Evita zoom automático em inputs no iOS (font-size < 16px dispara zoom) */
+@media screen and (max-width: 768px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
 
 /* Scrollbars invisíveis (mantém a rolagem) */

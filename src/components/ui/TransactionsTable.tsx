@@ -329,7 +329,7 @@ export function TransactionsTable() {
       <button
         type="button"
         onClick={() => setModalOpen(true)}
-        className="md:hidden fixed bottom-6 right-6 z-30 w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-[var(--brand-base)] text-white shadow-[var(--shadow-modal)] flex items-center justify-center hover:opacity-90 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
+        className="md:hidden fixed fab-bottom right-6 z-30 w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-[var(--brand-base)] text-white shadow-[var(--shadow-modal)] flex items-center justify-center hover:opacity-90 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
         aria-label="Adicionar transação"
       >
         <Icon icon={Add01Icon} size={24} />
