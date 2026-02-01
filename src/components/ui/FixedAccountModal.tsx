@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useLayoutEffect, useMemo, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Icon } from "@/components/ui/Icon";
@@ -58,9 +59,10 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [recurrenceOpen, setRecurrenceOpen] = useState(false);
   const [paymentOpen, setPaymentOpen] = useState(false);
-  const categoryRef = useRef<HTMLDivElement>(null);
-  const recurrenceRef = useRef<HTMLDivElement>(null);
-  const paymentRef = useRef<HTMLDivElement>(null);
+  const categoryTriggerRef = useRef<HTMLButtonElement>(null);
+  const recurrenceTriggerRef = useRef<HTMLButtonElement>(null);
+  const paymentTriggerRef = useRef<HTMLButtonElement>(null);
+  const [dropdownStyle, setDropdownStyle] = useState<{ top: number; left: number; width: number } | null>(null);
 
   useEffect(() => {
     if (!open) return;
@@ -81,18 +83,40 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
     }
   }, [open, initialData]);
 
+  const updateDropdownPosition = useCallback((trigger: HTMLButtonElement | null) => {
+    if (!trigger) return;
+    const rect = trigger.getBoundingClientRect();
+    setDropdownStyle({ top: rect.bottom + 4, left: rect.left, width: rect.width });
+  }, []);
+
+  useLayoutEffect(() => {
+    if (categoryOpen) updateDropdownPosition(categoryTriggerRef.current);
+    else if (recurrenceOpen) updateDropdownPosition(recurrenceTriggerRef.current);
+    else if (paymentOpen) updateDropdownPosition(paymentTriggerRef.current);
+    else setDropdownStyle(null);
+  }, [categoryOpen, recurrenceOpen, paymentOpen, updateDropdownPosition]);
+
+  const dropdownContentRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (categoryRef.current && !categoryRef.current.contains(e.target as Node))
+      const target = e.target as Node;
+      const inTrigger =
+        categoryTriggerRef.current?.contains(target) ||
+        recurrenceTriggerRef.current?.contains(target) ||
+        paymentTriggerRef.current?.contains(target);
+      const inDropdown = dropdownContentRef.current?.contains(target);
+      if (!inTrigger && !inDropdown) {
         setCategoryOpen(false);
-      if (recurrenceRef.current && !recurrenceRef.current.contains(e.target as Node))
         setRecurrenceOpen(false);
-      if (paymentRef.current && !paymentRef.current.contains(e.target as Node))
         setPaymentOpen(false);
+      }
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+    if (categoryOpen || recurrenceOpen || paymentOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }
+  }, [categoryOpen, recurrenceOpen, paymentOpen]);
 
   const handleSubmit = () => {
     onSubmit?.({
@@ -164,8 +188,9 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
 
             {/* Row: Categoria | Valor */}
             <div className="grid grid-cols-2 gap-2 w-full">
-              <div className="relative min-w-0" ref={categoryRef}>
+              <div className="relative min-w-0">
                 <button
+                  ref={categoryTriggerRef}
                   type="button"
                   onClick={() => {
                     setRecurrenceOpen(false);
@@ -180,23 +205,29 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                   </span>
                   <Icon icon={ArrowDown01Icon} size={16} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${categoryOpen ? "rotate-180" : ""}`} />
                 </button>
-                {categoryOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-1 max-h-[200px] overflow-y-auto rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] shadow-[var(--shadow-dropdown)] py-1 z-10">
-                    {CATEGORIES.map((c) => (
-                      <button
-                        key={c}
-                        type="button"
-                        onClick={() => {
-                          setCategory(c);
-                          setCategoryOpen(false);
-                        }}
-                        className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
-                      >
-                        {c}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {categoryOpen && dropdownStyle && typeof document !== "undefined" &&
+                  createPortal(
+                    <div
+                      ref={dropdownContentRef}
+                      className="fixed z-[60] max-h-[200px] overflow-y-auto rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] shadow-[var(--shadow-dropdown)] py-1"
+                      style={{ top: dropdownStyle.top, left: dropdownStyle.left, width: dropdownStyle.width }}
+                    >
+                      {CATEGORIES.map((c) => (
+                        <button
+                          key={c}
+                          type="button"
+                          onClick={() => {
+                            setCategory(c);
+                            setCategoryOpen(false);
+                          }}
+                          className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                        >
+                          {c}
+                        </button>
+                      ))}
+                    </div>,
+                    document.body
+                  )}
               </div>
               <div className="min-w-0 h-[var(--height-control)] rounded-[var(--radius-md)] bg-[var(--surface-input)] border border-[var(--neutral-100)] flex items-center px-4 gap-2 focus-within:ring-1 focus-within:ring-[var(--neutral-stroke-muted)] focus-within:border-[var(--neutral-stroke-soft)]">
                 <Icon icon={Wallet01Icon} size={20} className="shrink-0 text-[var(--neutral-icons-muted)]" />
@@ -212,8 +243,9 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
 
             {/* Row: Recorrência | Data */}
             <div className="grid grid-cols-2 gap-2 w-full">
-              <div className="relative min-w-0" ref={recurrenceRef}>
+              <div className="relative min-w-0">
                 <button
+                  ref={recurrenceTriggerRef}
                   type="button"
                   onClick={() => {
                     setCategoryOpen(false);
@@ -228,23 +260,29 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                   </span>
                   <Icon icon={ArrowDown01Icon} size={16} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${recurrenceOpen ? "rotate-180" : ""}`} />
                 </button>
-                {recurrenceOpen && (
-                  <div className="absolute top-full left-0 right-0 mt-1 rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] shadow-[var(--shadow-dropdown)] py-1 z-10">
-                    {RECURRENCE_OPTIONS.map((r) => (
-                      <button
-                        key={r}
-                        type="button"
-                        onClick={() => {
-                          setRecurrence(r);
-                          setRecurrenceOpen(false);
-                        }}
-                        className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
-                      >
-                        {r}
-                      </button>
-                    ))}
-                  </div>
-                )}
+                {recurrenceOpen && dropdownStyle && typeof document !== "undefined" &&
+                  createPortal(
+                    <div
+                      ref={dropdownContentRef}
+                      className="fixed z-[60] rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] shadow-[var(--shadow-dropdown)] py-1"
+                      style={{ top: dropdownStyle.top, left: dropdownStyle.left, width: dropdownStyle.width }}
+                    >
+                      {RECURRENCE_OPTIONS.map((r) => (
+                        <button
+                          key={r}
+                          type="button"
+                          onClick={() => {
+                            setRecurrence(r);
+                            setRecurrenceOpen(false);
+                          }}
+                          className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                        >
+                          {r}
+                        </button>
+                      ))}
+                    </div>,
+                    document.body
+                  )}
               </div>
               <div className="min-w-0">
                 <DatePicker
@@ -256,8 +294,9 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
             </div>
 
             {/* Meio pagamento - full width */}
-            <div className="relative" ref={paymentRef}>
+            <div className="relative">
               <button
+                ref={paymentTriggerRef}
                 type="button"
                 onClick={() => {
                   setCategoryOpen(false);
@@ -272,23 +311,29 @@ export function FixedAccountModal({ open, onClose, onSubmit, initialData }: Fixe
                 </span>
                 <Icon icon={ArrowDown01Icon} size={16} className={`shrink-0 text-[var(--neutral-icons-muted)] transition-transform ${paymentOpen ? "rotate-180" : ""}`} />
               </button>
-              {paymentOpen && (
-                <div className="absolute top-full left-0 right-0 mt-1 rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] shadow-[var(--shadow-dropdown)] py-1 z-10">
-                  {PAYMENT_METHODS.map((pm) => (
-                    <button
-                      key={pm}
-                      type="button"
-                      onClick={() => {
-                        setPaymentMethod(pm);
-                        setPaymentOpen(false);
-                      }}
-                      className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
-                    >
-                      {pm}
-                    </button>
-                  ))}
-                </div>
-              )}
+              {paymentOpen && dropdownStyle && typeof document !== "undefined" &&
+                createPortal(
+                  <div
+                    ref={dropdownContentRef}
+                    className="fixed z-[60] rounded-[var(--radius-md)] border border-[var(--neutral-100)] bg-[var(--surface-card)] shadow-[var(--shadow-dropdown)] py-1"
+                    style={{ top: dropdownStyle.top, left: dropdownStyle.left, width: dropdownStyle.width }}
+                  >
+                    {PAYMENT_METHODS.map((pm) => (
+                      <button
+                        key={pm}
+                        type="button"
+                        onClick={() => {
+                          setPaymentMethod(pm);
+                          setPaymentOpen(false);
+                        }}
+                        className="w-full px-4 py-2.5 text-left text-sm font-light text-[var(--neutral-700)] hover:bg-[var(--neutral-75)]"
+                      >
+                        {pm}
+                      </button>
+                    ))}
+                  </div>,
+                  document.body
+                )}
             </div>
           </div>
     </BottomSheet>
