@@ -204,7 +204,7 @@ export function UpcomingDueDates() {
           <button
             type="button"
             onClick={() => setModalOpen(true)}
-            className="h-[var(--height-control)] px-4 bg-[var(--brand-base)] hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)] flex gap-2 items-center rounded-[var(--radius-md)] shrink-0 text-white"
+            className="hidden md:flex h-[var(--height-control)] px-4 bg-[var(--brand-base)] hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)] gap-2 items-center rounded-[var(--radius-md)] shrink-0 text-white"
           >
             <Icon icon={Add01Icon} size={20} className="text-white shrink-0" />
             <span className="text-sm font-normal text-white">
@@ -239,7 +239,7 @@ export function UpcomingDueDates() {
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-2 pt-2 pb-4 px-4">
+            <div className="flex flex-col gap-2 pt-2 pb-24 md:pb-4 px-4">
               {items.map((item) => (
                 <div key={item.id} className="min-w-0">
                   <DueDateItem
@@ -294,6 +294,16 @@ export function UpcomingDueDates() {
         icon={detailItem ? (CATEGORY_ICONS[detailItem.category] ?? Home01Icon) : undefined}
         onMarkAsPaid={handleMarkAsPaid}
       />
+
+      {/* Mobile: FAB Nova Conta Fixa */}
+      <button
+        type="button"
+        onClick={() => setModalOpen(true)}
+        className="md:hidden fixed fab-bottom right-6 z-30 w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-[var(--brand-base)] text-white shadow-[var(--shadow-modal)] flex items-center justify-center hover:opacity-90 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
+        aria-label="Adicionar conta fixa"
+      >
+        <Icon icon={Add01Icon} size={24} />
+      </button>
     </div>
   );
 }
