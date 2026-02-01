@@ -1,0 +1,72 @@
+/**
+ * Tailwind v4 - Theme configuration
+ * Custom design tokens (brand, feedback, neutral) + layout (radius, height)
+ */
+
+@theme inline {
+  /* Brand */
+  --color-brand-lighter: var(--brand-lighter);
+  --color-brand-light: var(--brand-light);
+  --color-brand-base: var(--brand-base);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-darker: var(--brand-darker);
+
+  /* Feedback */
+  --color-feedback-success-lighter: var(--feedback-success-lighter);
+  --color-feedback-success-light: var(--feedback-success-light);
+  --color-feedback-success-base: var(--feedback-success-base);
+  --color-feedback-success-dark: var(--feedback-success-dark);
+  --color-feedback-success-darker: var(--feedback-success-darker);
+  --color-feedback-warning-lighter: var(--feedback-warning-lighter);
+  --color-feedback-warning-light: var(--feedback-warning-light);
+  --color-feedback-warning-base: var(--feedback-warning-base);
+  --color-feedback-warning-dark: var(--feedback-warning-dark);
+  --color-feedback-warning-darker: var(--feedback-warning-darker);
+  --color-feedback-error-lighter: var(--feedback-error-lighter);
+  --color-feedback-error-light: var(--feedback-error-light);
+  --color-feedback-error-base: var(--feedback-error-base);
+  --color-feedback-error-dark: var(--feedback-error-dark);
+  --color-feedback-error-darker: var(--feedback-error-darker);
+  --color-feedback-info-lighter: var(--feedback-info-lighter);
+  --color-feedback-info-light: var(--feedback-info-light);
+  --color-feedback-info-base: var(--feedback-info-base);
+  --color-feedback-info-dark: var(--feedback-info-dark);
+  --color-feedback-info-darker: var(--feedback-info-darker);
+
+  /* Neutral - stroke */
+  --color-neutral-stroke-white: var(--neutral-stroke-white);
+  --color-neutral-stroke-soft: var(--neutral-stroke-soft);
+  --color-neutral-stroke-muted: var(--neutral-stroke-muted);
+  --color-neutral-stroke-strong: var(--neutral-stroke-strong);
+  --color-neutral-stroke-black: var(--neutral-stroke-black);
+  --color-neutral-stroke-brand: var(--neutral-stroke-brand);
+
+  /* Neutral - text */
+  --color-neutral-text-brand: var(--neutral-text-brand);
+  --color-neutral-text-white: var(--neutral-text-white);
+  --color-neutral-text-soft: var(--neutral-text-soft);
+  --color-neutral-text-muted: var(--neutral-text-muted);
+  --color-neutral-text-strong: var(--neutral-text-strong);
+  --color-neutral-text-black: var(--neutral-text-black);
+
+  /* Neutral - icon */
+  --color-neutral-icons-brand: var(--neutral-icons-brand);
+  --color-neutral-icons-white: var(--neutral-icons-white);
+  --color-neutral-icons-soft: var(--neutral-icons-soft);
+  --color-neutral-icons-muted: var(--neutral-icons-muted);
+  --color-neutral-icons-strong: var(--neutral-icons-strong);
+  --color-neutral-icons-black: var(--neutral-icons-black);
+
+  /* Neutral - static */
+  --color-neutral-static-white: var(--neutral-static-white);
+  --color-neutral-static-black: var(--neutral-static-black);
+
+  /* Layout */
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --height-control: 40px;
+  --shadow-card: 0 1px 8px rgba(13, 13, 13, 0.04);
+  --shadow-modal: var(--shadow-modal);
+  --shadow-dropdown: var(--shadow-dropdown);
+}

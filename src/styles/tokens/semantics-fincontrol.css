@@ -1,0 +1,68 @@
+:root {
+  --brand-lighter: #3f3f46;
+  --brand-light: var(--fathomgray-500);
+  --brand-base: var(--fathomgray-950);
+  --brand-dark: var(--fathomgray-400);
+  --brand-darker: var(--fathomgray-800);
+
+  --feedback-success-lighter: #33db87;
+  --feedback-success-light: var(--green-200);
+  --feedback-success-base: var(--green-500);
+  --feedback-success-dark: var(--green-600);
+  --feedback-success-darker: var(--green-700);
+
+  --feedback-warning-lighter: #fdc22c;
+  --feedback-warning-light: #fdc22c;
+  --feedback-warning-base: var(--yellow-500);
+  --feedback-warning-dark: var(--yellow-600);
+  --feedback-warning-darker: var(--orange-700);
+
+  --feedback-error-lighter: #fd2c53;
+  --feedback-error-light: var(--red-200);
+  --feedback-error-base: var(--red-500);
+  --feedback-error-dark: var(--red-600);
+  --feedback-error-darker: var(--red-700);
+
+  --feedback-info-lighter: #306bfd;
+  --feedback-info-light: var(--blue-200);
+  --feedback-info-base: var(--blue-500);
+  --feedback-info-dark: var(--blue-600);
+  --feedback-info-darker: var(--blue-700);
+
+  --neutral-stroke-white: var(--neutral-100);
+  --neutral-stroke-soft: var(--neutral-200);
+  --neutral-stroke-muted: var(--neutral-300);
+  --neutral-stroke-strong: var(--neutral-700);
+  --neutral-stroke-black: var(--neutral-950);
+
+  --neutral-static-white: #ffffff;
+  --neutral-static-black: #000000;
+
+  --neutral-stroke-brand: var(--brand-base);
+
+  --neutral-icons-brand: var(--brand-base);
+  --neutral-icons-white: var(--neutral-50);
+  --neutral-icons-soft: var(--neutral-200);
+  --neutral-icons-muted: var(--neutral-300);
+  --neutral-icons-strong: var(--neutral-700);
+  --neutral-icons-black: var(--neutral-950);
+
+  --neutral-text-brand: var(--brand-base);
+  --neutral-text-white: var(--neutral-50);
+  --neutral-text-soft: var(--neutral-200);
+  --neutral-text-muted: var(--neutral-300);
+  --neutral-text-strong: var(--neutral-700);
+  --neutral-text-black: var(--neutral-950);
+
+  /* Surfaces */
+  --surface-card: var(--neutral-25);
+  --surface-input: var(--neutral-50);
+  --surface-elevated: var(--neutral-25);
+  --surface-overlay: var(--neutral-25);
+
+  /* Shadows */
+  --shadow-card: 0 1px 8px rgba(13, 13, 13, 0.04);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-dropdown: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-focus-success: 0 0 0 2px rgba(51, 219, 135, 0.08);
+}

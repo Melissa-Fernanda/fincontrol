@@ -1,8 +1,10 @@
+@import "../styles/tokens/tokens.css";
 @import "tailwindcss";
+@import "../../tailwind/theme.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--neutral-static-white);
+  --foreground: var(--neutral-text-black);
 }
 
 @theme inline {
@@ -14,8 +16,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--neutral-950);
+    --foreground: var(--neutral-100);
   }
 }
 
@@ -23,4 +25,36 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Scrollbars invisíveis (mantém a rolagem) */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Date picker alinhado ao design system */
+.date-picker-input {
+  color-scheme: light;
+  font-family: "Lexend", sans-serif;
+}
+
+.date-picker-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  filter: invert(0.4);
+}
+
+.date-picker-input::-webkit-date-and-time-value {
+  text-align: left;
+}
+
+/* Posiciona o portal do Next.js (dev tools) no topo da viewport */
+nextjs-portal {
+  top: 0 !important;
+  left: 0 !important;
 }
