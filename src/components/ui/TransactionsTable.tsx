@@ -47,6 +47,7 @@ export function TransactionsTable() {
   const {
     transactions,
     addTransaction,
+    updateTransaction,
     deleteTransaction,
   } = useFinance();
   const [searchQuery, setSearchQuery] = useState("");
@@ -57,6 +58,7 @@ export function TransactionsTable() {
   const [dateOpen, setDateOpen] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingTransactionId, setEditingTransactionId] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
   const categoryRef = useRef<HTMLDivElement>(null);
   const dateRef = useRef<HTMLDivElement>(null);
@@ -236,7 +238,7 @@ export function TransactionsTable() {
         {/* New Transaction Button - desktop only */}
         <button
           type="button"
-          onClick={() => setModalOpen(true)}
+          onClick={() => { setModalOpen(true); setEditingTransactionId(null); }}
           className="hidden md:flex h-[var(--height-control)] px-4 bg-[var(--brand-base)] rounded-[var(--radius-md)] items-center gap-2 text-white hover:opacity-90 active:scale-[0.98] active:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] transition-all duration-150 ease-out shadow-[var(--shadow-card)]"
         >
           <Icon icon={Add01Icon} size={20} className="shrink-0" />
@@ -328,7 +330,7 @@ export function TransactionsTable() {
       {/* Mobile: FAB Nova Transação */}
       <button
         type="button"
-        onClick={() => setModalOpen(true)}
+        onClick={() => { setModalOpen(true); setEditingTransactionId(null); }}
         className="md:hidden fixed fab-bottom right-6 z-30 w-14 h-14 min-w-[56px] min-h-[56px] rounded-full bg-[var(--brand-base)] text-white shadow-[var(--shadow-modal)] flex items-center justify-center hover:opacity-90 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)] focus-visible:ring-offset-2"
         aria-label="Adicionar transação"
       >
@@ -351,10 +353,31 @@ export function TransactionsTable() {
       />
 
       <TransactionModal
-        open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        open={modalOpen || editingTransactionId != null}
+        onClose={() => {
+          setModalOpen(false);
+          setEditingTransactionId(null);
+        }}
+        initialData={
+          editingTransactionId
+            ? (() => {
+                const tx = transactions.find((t) => t.id === editingTransactionId);
+                if (!tx) return null;
+                const [d, m, y] = tx.date.split("/");
+                return {
+                  type: tx.type,
+                  amount: tx.amount,
+                  date: y && m && d ? `${y}-${m}-${d}` : "",
+                  category: tx.category,
+                  paymentMethod: tx.paymentMethod,
+                  name: tx.description,
+                  description: tx.details,
+                };
+              })()
+            : null
+        }
         onSubmit={(data) => {
-          addTransaction({
+          const payload = {
             description: data.name.trim() || "Sem título",
             category: data.category,
             date: dateInputToDDMMYYYY(data.date),
@@ -362,7 +385,13 @@ export function TransactionsTable() {
             details: data.description.trim(),
             amount: data.amount,
             type: data.type,
-          });
+          };
+          if (editingTransactionId) {
+            updateTransaction(editingTransactionId, payload);
+            setEditingTransactionId(null);
+          } else {
+            addTransaction(payload);
+          }
           setModalOpen(false);
         }}
       />
@@ -380,7 +409,7 @@ export function TransactionsTable() {
               </p>
               <button
                 type="button"
-                onClick={() => setModalOpen(true)}
+                onClick={() => { setModalOpen(true); setEditingTransactionId(null); }}
                 className="mt-4 h-[var(--height-control)] px-6 bg-[var(--brand-base)] rounded-[var(--radius-md)] text-white text-sm font-normal hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neutral-400)]"
               >
                 Adicionar transação
@@ -463,6 +492,7 @@ export function TransactionsTable() {
               <div className="flex justify-end gap-2 w-[72px] shrink-0">
                 <button
                   type="button"
+                  onClick={() => setEditingTransactionId(tx.id)}
                   className="text-[var(--neutral-icons-muted)] hover:text-[var(--brand-base)] transition-colors p-0.5"
                   aria-label="Editar"
                 >
@@ -524,6 +554,7 @@ export function TransactionsTable() {
                       <div className="flex gap-2">
                         <button
                           type="button"
+                          onClick={() => setEditingTransactionId(tx.id)}
                           className="p-2 text-[var(--neutral-icons-muted)] hover:text-[var(--brand-base)] transition-colors rounded-[var(--radius-md)]"
                           aria-label="Editar"
                         >

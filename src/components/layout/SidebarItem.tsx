@@ -30,7 +30,7 @@ const variantStyles: Record<
   selected:
     "bg-[var(--neutral-static-black)] text-[var(--neutral-static-white)] [&_svg]:text-[var(--neutral-static-white)]",
   default:
-    "relative bg-[var(--neutral-50)] text-[var(--neutral-text-muted)] before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:bg-black/8 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 before:pointer-events-none [&_svg]:text-[var(--neutral-icons-strong)]",
+    "relative bg-[var(--neutral-50)] text-[var(--neutral-text-muted)] before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:bg-black/8 before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100 before:pointer-events-none [&_svg]:text-[var(--neutral-text-muted)]",
   disabled:
     "text-[var(--neutral-text-muted)] opacity-50 cursor-not-allowed pointer-events-none [&_svg]:text-[var(--neutral-text-muted)] active:scale-100",
 };

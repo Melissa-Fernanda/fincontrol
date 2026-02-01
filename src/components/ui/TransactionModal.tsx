@@ -33,10 +33,22 @@ const CATEGORIES = [
 
 const PAYMENT_METHODS = ["PIX", "Débito", "Cartão de Crédito"];
 
+export interface TransactionFormData {
+  type: "income" | "expense";
+  amount: number;
+  date: string;
+  category: string;
+  paymentMethod: string;
+  name: string;
+  description: string;
+}
+
 export interface TransactionModalProps {
   open: boolean;
   onClose: () => void;
-  onSubmit?: (data: {
+  onSubmit?: (data: TransactionFormData) => void;
+  /** Dados iniciais para edição */
+  initialData?: {
     type: "income" | "expense";
     amount: number;
     date: string;
@@ -44,10 +56,10 @@ export interface TransactionModalProps {
     paymentMethod: string;
     name: string;
     description: string;
-  }) => void;
+  } | null;
 }
 
-export function TransactionModal({ open, onClose, onSubmit }: TransactionModalProps) {
+export function TransactionModal({ open, onClose, onSubmit, initialData }: TransactionModalProps) {
   const [transactionType, setTransactionType] = useState<"expense" | "income">("expense");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("");
@@ -72,13 +84,23 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
 
   useEffect(() => {
     if (!open) return;
-    setAmount("");
-    setDate("");
-    setName("");
-    setDescription("");
-    setCategory("");
-    setPaymentMethod("");
-  }, [open]);
+    if (initialData) {
+      setTransactionType(initialData.type);
+      setAmount(Math.abs(initialData.amount).toFixed(2).replace(".", ","));
+      setDate(initialData.date);
+      setName(initialData.name);
+      setDescription(initialData.description);
+      setCategory(initialData.category);
+      setPaymentMethod(initialData.paymentMethod);
+    } else {
+      setAmount("");
+      setDate("");
+      setName("");
+      setDescription("");
+      setCategory("");
+      setPaymentMethod("");
+    }
+  }, [open, initialData]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -112,8 +134,8 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
     <BottomSheet
       open={open}
       onClose={onClose}
-      title="Adicionar Transação"
-      subtitle="Preencha os detalhes da transação financeira abaixo."
+      title={initialData ? "Editar Transação" : "Adicionar Transação"}
+      subtitle={initialData ? "Atualize os detalhes da transação." : "Preencha os detalhes da transação financeira abaixo."}
       hasDirtyChanges={hasDirtyChanges}
       footer={
         <div className="flex gap-2 items-center">
@@ -137,7 +159,7 @@ export function TransactionModal({ open, onClose, onSubmit }: TransactionModalPr
                 : "bg-[var(--neutral-300)] cursor-not-allowed opacity-60"
             )}
           >
-            Salvar Transação
+            {initialData ? "Salvar alterações" : "Salvar Transação"}
           </button>
         </div>
       }
