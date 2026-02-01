@@ -29,8 +29,8 @@ export default function Home() {
 
       <FinancialStats data={financialData} />
 
-      <div className="mt-4 sm:mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-stretch w-full min-w-0">
-        <div className="min-w-0 min-h-[280px] sm:min-h-[320px] lg:min-h-[400px] w-full">
+      <div className="mt-4 sm:mt-6 grid grid-cols-1 lg:grid-cols-[1fr_minmax(320px,400px)] gap-4 sm:gap-6 items-stretch w-full min-w-0">
+        <div className="min-w-0 min-h-[280px] sm:min-h-[320px] lg:min-h-[400px] w-full overflow-hidden">
           <HorizontalBarChart
             data={categoryChartData}
             onViewDetails={() => router.push("/transacoes")}
