@@ -195,7 +195,7 @@ export function UpcomingDueDates() {
 
   return (
     <div className="w-full h-full flex flex-col min-h-0 min-w-0">
-      <div className="w-full flex-1 min-h-0 bg-[var(--surface-card)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] border border-[var(--neutral-100)] p-0 flex flex-col gap-4">
+      <div className="w-full flex-1 min-h-[560px] md:min-h-0 bg-[var(--surface-card)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] border border-[var(--neutral-100)] p-0 flex flex-col gap-4">
         <div className="flex items-center justify-between w-full shrink-0 pt-4 px-4">
           <h2 className="font-['Lexend'] font-normal text-[var(--neutral-text-black)] text-[18px] leading-[1.4]">
             Próximos Vencimentos
