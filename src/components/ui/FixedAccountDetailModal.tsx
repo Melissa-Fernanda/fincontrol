@@ -159,7 +159,7 @@ export function FixedAccountDetailModal({
         </div>
       }
     >
-      <div className="flex flex-col gap-2 -mx-6 px-6">
+      <div className="flex flex-col gap-2 px-6 pt-3 pb-3 w-full">
             <DatePicker
               value={date}
               onChange={setDate}

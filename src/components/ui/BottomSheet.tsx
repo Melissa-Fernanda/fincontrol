@@ -200,7 +200,7 @@ export function BottomSheet({
           )}
 
           {/* Body - scrollable ou confirmar descarte */}
-          <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-touch px-6">
+          <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden scroll-touch px-0">
             {showDiscardConfirm ? (
               <div className="py-6 flex flex-col gap-4">
                 <p className="text-[var(--neutral-700)] text-sm font-light">
