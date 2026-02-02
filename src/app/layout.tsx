@@ -26,6 +26,9 @@ const lexend = Lexend({
 export const metadata: Metadata = {
   title: "FinControl",
   description: "Controle financeiro pessoal",
+  icons: {
+    icon: "/logo-symbol.svg",
+  },
 };
 
 export default function RootLayout({

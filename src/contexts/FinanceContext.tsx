@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -116,6 +117,31 @@ const INITIAL_FIXED_ACCOUNTS: FixedAccountItem[] = [
   { id: 5, name: "Faculdade", category: "Estudo", amount: "R$ 1.200,00", recurrence: "Mensal", date: "2025-01-10", paymentMethod: "Débito", isPaid: false },
 ];
 
+// --- localStorage ---
+
+const STORAGE_KEY_TRANSACTIONS = "fincontrol-transactions";
+const STORAGE_KEY_FIXED_ACCOUNTS = "fincontrol-fixed-accounts";
+
+function loadFromStorage<T>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const saved = localStorage.getItem(key);
+    if (!saved) return fallback;
+    return JSON.parse(saved) as T;
+  } catch {
+    return fallback;
+  }
+}
+
+function saveToStorage<T>(key: string, data: T): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+  } catch {
+    // ignore quota/parse errors
+  }
+}
+
 // --- Context ---
 
 interface FinanceContextValue {
@@ -137,8 +163,20 @@ interface FinanceContextValue {
 const FinanceContext = createContext<FinanceContextValue | null>(null);
 
 export function FinanceProvider({ children }: { children: ReactNode }) {
-  const [transactions, setTransactions] = useState<TransactionRow[]>(INITIAL_TRANSACTIONS);
-  const [fixedAccounts, setFixedAccounts] = useState<FixedAccountItem[]>(INITIAL_FIXED_ACCOUNTS);
+  const [transactions, setTransactions] = useState<TransactionRow[]>(() =>
+    loadFromStorage(STORAGE_KEY_TRANSACTIONS, INITIAL_TRANSACTIONS)
+  );
+  const [fixedAccounts, setFixedAccounts] = useState<FixedAccountItem[]>(() =>
+    loadFromStorage(STORAGE_KEY_FIXED_ACCOUNTS, INITIAL_FIXED_ACCOUNTS)
+  );
+
+  useEffect(() => {
+    saveToStorage(STORAGE_KEY_TRANSACTIONS, transactions);
+  }, [transactions]);
+
+  useEffect(() => {
+    saveToStorage(STORAGE_KEY_FIXED_ACCOUNTS, fixedAccounts);
+  }, [fixedAccounts]);
 
   const addTransaction = useCallback((data: Omit<TransactionRow, "id">) => {
     setTransactions((prev) => {

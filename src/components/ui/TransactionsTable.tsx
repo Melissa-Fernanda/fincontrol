@@ -427,7 +427,7 @@ export function TransactionsTable() {
               {/* Desktop: Table view */}
               <div className="hidden md:flex flex-1 min-h-0 overflow-x-auto flex-col gap-2">
               {/* Column Titles */}
-              <div className="grid grid-cols-[minmax(140px,1fr)_70px_90px_minmax(80px,1fr)_90px_72px] gap-x-3 gap-y-0 items-center py-[10px] px-4 bg-[var(--neutral-75)] rounded-t-[var(--radius-md)] text-[var(--neutral-text-muted)] text-sm font-normal shrink-0 min-w-[560px]">
+              <div className="grid grid-cols-[minmax(140px,1fr)_70px_90px_minmax(80px,1fr)_90px_72px] gap-x-3 gap-y-0 items-center py-[10px] px-4 bg-[var(--neutral-75)] rounded-[var(--radius-md)] text-[var(--neutral-text-muted)] text-sm font-normal shrink-0 min-w-[560px]">
                 <div className="min-w-0 truncate">Descrição / Categoria</div>
                 <div className="text-center shrink-0">Data</div>
                 <div className="text-center shrink-0 truncate">Pagamento</div>
