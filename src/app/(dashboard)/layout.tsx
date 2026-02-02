@@ -23,7 +23,7 @@ export default function DashboardLayout({
         <Sidebar variant="drawer" />
 
         {/* Main content */}
-        <main className="flex-1 min-h-0 min-w-0 overflow-y-auto overflow-x-auto scroll-touch p-4 pt-14 lg:pt-4 bg-[var(--surface-input)] flex flex-col relative">
+        <main className="flex-1 min-h-0 min-w-0 overflow-y-auto overflow-x-auto scroll-touch p-4 pt-20 lg:pt-4 bg-[var(--surface-input)] flex flex-col relative">
           {/* Mobile menu trigger - visible only on mobile */}
           <SidebarMobileTrigger />
           {children}
