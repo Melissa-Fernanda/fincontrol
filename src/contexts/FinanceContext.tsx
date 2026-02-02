@@ -121,6 +121,7 @@ const INITIAL_FIXED_ACCOUNTS: FixedAccountItem[] = [
 
 const STORAGE_KEY_TRANSACTIONS = "fincontrol-transactions";
 const STORAGE_KEY_FIXED_ACCOUNTS = "fincontrol-fixed-accounts";
+const STORAGE_KEY_LAST_MONTH = "fincontrol-last-month";
 
 function loadFromStorage<T>(key: string, fallback: T): T {
   if (typeof window === "undefined") return fallback;
@@ -178,6 +179,26 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
     saveToStorage(STORAGE_KEY_FIXED_ACCOUNTS, fixedAccounts);
   }, [fixedAccounts]);
 
+  // Reset contas fixas ao mudar o mês (isPaid: false, datas atualizadas para o mês atual)
+  useEffect(() => {
+    const now = new Date();
+    const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}`;
+    const lastMonth = loadFromStorage(STORAGE_KEY_LAST_MONTH, "");
+
+    if (lastMonth && lastMonth !== currentMonth) {
+      setFixedAccounts((prev) => {
+        const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+        return prev.map((f) => {
+          const d = parseDateYYYYMMDD(f.date);
+          const day = Math.min(d ? d.getDate() : 1, lastDayOfMonth);
+          const newDate = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+          return { ...f, isPaid: false, date: newDate };
+        });
+      });
+    }
+    saveToStorage(STORAGE_KEY_LAST_MONTH, currentMonth);
+  }, []);
+
   const addTransaction = useCallback((data: Omit<TransactionRow, "id">) => {
     setTransactions((prev) => {
       const nextId = String(Math.max(0, ...prev.map((t) => parseInt(t.id, 10) || 0)) + 1);
@@ -223,7 +244,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const financialData = useMemo((): FinancialData => {
-    // Saldo: entradas/saídas das transações menos contas fixas pagas
+    // Saldo: entradas/saídas das transações menos contas fixas marcadas como pagas
     const transactionsBalance = transactions.reduce((acc, t) => acc + t.amount, 0);
     const paidFixedAmount = fixedAccounts
       .filter((f) => f.isPaid)
