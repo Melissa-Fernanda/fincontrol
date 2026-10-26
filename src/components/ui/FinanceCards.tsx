@@ -4,10 +4,12 @@ import { Icon } from "@/components/ui/Icon";
 import { AlertCircleIcon } from "@/components/icons";
 import { Badge } from "@/components/ui/Badge";
 import type { BadgeVariant } from "@/components/ui/Badge";
+import { twMerge } from "tailwind-merge";
 
 interface BalanceCardProps {
   title?: string;
   balance: string;
+  className?: string;
   badge?: {
     text: string;
     variant?: "neutral" | "success" | "warning";
@@ -18,11 +20,12 @@ interface BalanceCardProps {
 export function BalanceCard({ 
   title = "Saldo Atual", 
   balance, 
+  className,
   badge,
   icon = <WalletIcon className="w-6 h-6 text-white" />
 }: BalanceCardProps) {
   return (
-    <div className="bg-[var(--brand-base)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] overflow-hidden">
+    <div className={twMerge("bg-[var(--brand-base)] rounded-[var(--radius-lg)] shadow-[var(--shadow-card)] p-4 sm:p-3 min-w-0 flex-1 flex flex-col gap-3 font-[var(--font-lexend)] overflow-hidden", className)}>
       <div className="flex items-center justify-between w-full min-w-0 gap-2">
         <p className="font-light text-xs sm:text-sm text-white truncate shrink min-w-0">{title}</p>
         <span className="shrink-0">{icon}</span>

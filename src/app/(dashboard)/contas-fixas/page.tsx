@@ -55,6 +55,7 @@ export default function ContasFixasPage() {
         <BalanceCard
           title="Total Comprometido"
           balance={totalComprometido}
+          className="bg-[var(--feedback-info-base)]"
           badge={{ text: "Mensal", variant: "neutral" }}
           icon={
             <Icon icon={MoneyExchange03Icon} size={24} className="text-white shrink-0" />
