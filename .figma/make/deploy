@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+NODE_ENV=production NEXT_TURBOPACK_EXPERIMENTAL_USE_SYSTEM_TLS_CERTS=1 npm run build
+rm -rf out
+mkdir -p out/_next
+cp -R .next/static out/_next/static
+cp -R public/. out/
+find .next/server/app -maxdepth 1 -type f -exec cp {} out/ \;
+find .next/server/app -maxdepth 1 -type d -name '*.segments' -exec cp -R {} out/ \;
+[[ -f "out/index.html" ]] || {
+  echo "Expected static build output at out" >&2
+  exit 1
+}
+figma make deploy --build-dir "out"
